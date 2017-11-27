@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  {% include head-meta.html %}
+  <title>{{ page.title }}</title>
+  {% include head-links.html %}
+
+  <!-- 
+    Add your scripts in "scripts-custom.html" 
+    copy them all in the "/js/" folder 
+  -->
+  
+  <script src="sketch.js"></script>
+
+</head>
+
+<body>
+  {% include nav-sketch.html %}
+  <div id="p5Container" class="canvas-container"></div>
+  {% include scripts-custom.html %}  
+  {% include scripts-core.html %}
+</body>
+
+</html>
