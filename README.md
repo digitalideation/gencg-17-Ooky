@@ -1,11 +1,11 @@
-![hslu logo](https://raw.githubusercontent.com/digitalideation/BA_222_GENCG/master/docs/assets/images/hslu-logo-xtra-small.png "hslu logo")
+![hslu logo](https://raw.githubusercontent.com/digitalideation/BA_222_GENCG_H1701/master/docs/assets/images/hslu-logo-xtra-small.png "hslu logo")
 
 ## Generative Computer Graphics
 
 [![MIT License](https://img.shields.io/badge/license-MIT-blue.svg)](http://opensource.org/licenses/MIT)
 [![Twitter](https://img.shields.io/twitter/url/https/github.com/webslides/webslides.svg?style=social)](https://twitter.com/hslu)
 
-This repo hold students' examples for the class "I.BA_222_GENCG.H1701 - Winter 2017" it is build on github pages (Jekyll).
+This repo hold students' work for the class "I.BA_222_GENCG.H1701 - Winter 2017" it is built on github pages (Jekyll).
 
 ```
 ├── _01-Shapes        (Shapes collection)       + COLLECTIONS
@@ -34,5 +34,4 @@ All examples should be placed in the corresponding **collection** folder. To cre
 
 All the info regarding the class as well as direct links to all materials (slides, notebooks, examples, etc... ) are accessible via the github pages for this repository:
 
-**[https://digitalideation.github.io/BA_222_GENCG/](https://digitalideation.github.io/BA_222_GENCG/)**
-
+**[https://digitalideation.github.io/BA_222_GENCG_H1701/](https://digitalideation.github.io/BA_222_GENCG_H1701/)**
