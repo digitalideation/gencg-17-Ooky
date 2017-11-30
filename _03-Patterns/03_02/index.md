@@ -2,7 +2,7 @@
 layout: sketch
 title: "03_02"
 category: "Experiment"
-thumb_name: "thumb.jpg"
+thumb_name: "thumb.gif"
 ---
 
 <!--
