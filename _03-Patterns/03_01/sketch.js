@@ -47,15 +47,6 @@ function windowResized() {
   resizeCanvas(windowWidth, windowHeight, false);
 }
 
-// Int conversion
-function toInt(value) {
-  return ~~value;
-}
-
-// Timestamp
-function timestamp() {
-  return Date.now();
-}
 
 // Thumb
 function saveThumb(w, h) {
