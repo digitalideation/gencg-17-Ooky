@@ -2,6 +2,7 @@
 var max_distance = 50;
 var randomSeedValue = 0;
 var stateCounter = 0;
+var currentTextState = "arc";
 
 
 function setup() {
@@ -11,6 +12,7 @@ function setup() {
   // Detect screen density (retina)
   var density = displayDensity();
   pixelDensity(density);
+  textSize(32);
 }
 
 function draw() {
@@ -21,6 +23,10 @@ function draw() {
   stroke(color(0), 0);
   strokeWeight(1);
 
+
+  text(currentTextState, 8, 24);
+
+  fill(0, 0, 0, 0);
   for (columns = 0; columns < windowWidth * 2; columns += 100) {
     for (rows = 0; rows < windowHeight * 2; rows += 100) {
       var diameter = dist(mouseX, mouseY, rows, columns);
@@ -31,6 +37,10 @@ function draw() {
       pop();
     }
   }
+
+
+
+
 }
 
 function mousePressed() {
@@ -54,33 +64,41 @@ function switchState(diameter) {
         diameter,
         options.arcStartRadian,
         options.arcEndRadian);
+      currentTextState = "arc";
       break;
     case 1:
       line(options.lineX,
         options.lineY,
         diameter,
         diameter);
+      currentTextState = "line";
       break;
     case 2:
       strokeWeight(options.pointStrokeWeight);
       for (var i = 1; i <= options.pointCounts; i++) {
         point(mouseX * i, mouseY * i);
       }
+      currentTextState = "point";
       break;
     case 3:
       quad(options.quadX, options.quadY, windowWidth - mouseX, 0, windowHeight - mouseY, 0, mouseX, mouseY);
+      currentTextState = "quad";
       break;
     case 4:
       ellipse(options.ellipseX, options.ellipseY, diameter, diameter);
+      currentTextState = "ellipse";
       break;
     case 5:
       triangle(diameter, diameter, options.triangleX2, options.triangleY2, mouseX, mouseY);
+      currentTextState = "triangle";
       break;
     case 6:
       rect(options.rectX, options.rectY, diameter, diameter);
+      currentTextState = "rect";
       break;
     default:
       ellipse(options.ellipseX, options.ellipseY, diameter, diameter);
+      currentTextState = "ellipse";
   }
 }
 
