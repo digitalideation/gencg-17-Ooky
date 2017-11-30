@@ -18,7 +18,7 @@ function setup() {
 
 function draw() {
   translate(width / options.tileCount / 2, height / options.tileCount / 2);
-  background(25, options.circleAlpha);
+  background(25, options.backgroundAlphaValue);
   smooth();
   noFill();
   stroke(options.circleColor);
