@@ -9,6 +9,7 @@ var randomColorValue;
 var randomSaturationValue;
 var colorValueCounter = 0;
 var colorCycleIteration = 3;
+let strokeWeightValue = 20;
 
 
 function setup() {
@@ -42,7 +43,7 @@ function draw() {
     var radius = mouseX - width / 2 + 0.5;
     var angle = TWO_PI / circleResolution;
 
-    strokeWeight(20);
+    strokeWeight(strokeWeightValue);
     stroke(randomColor2, 25);
 
     beginShape();
@@ -66,8 +67,10 @@ function mouseReleased() {
   if (colorValueCounter >= colorCycleIteration) {
     randomColorValue = abs(randomColorValue - toInt(random(350)));
     colorValueCounter = 0;
+    strokeWeightValue = 20;
   } else {
     colorValueCounter++;
+    strokeWeightValue -=5;
   }
   randomSaturationValue = toInt(random(100));
 }
