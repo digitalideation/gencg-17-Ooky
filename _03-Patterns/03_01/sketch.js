@@ -2,8 +2,7 @@
 // Generative Gestaltung, ISBN: 978-3-87439-759-9
 
 // Global var
-let tileCount, circleColor, strokeWeightFactor, backgroundAlphaValue;
-let enableMouseX;
+let strokeWeightFactor;
 
 
 function setup() {
@@ -14,28 +13,24 @@ function setup() {
   var density = displayDensity();
   pixelDensity(density);
   // Init var
-  tileCount = 20;
-  circleColor = color(255, 100);
   strokeWeightFactor = 5;
-  backgroundAlphaValue = 50;
-  enableMouseX = false;
 }
 
 function draw() {
-  translate(width / tileCount / 2, height / tileCount / 2);
-  background(25, backgroundAlphaValue);
+  translate(width / options.tileCount / 2, height / options.tileCount / 2);
+  background(25, options.circleAlpha);
   smooth();
   noFill();
-  stroke(circleColor);
+  stroke(options.circleColor);
   strokeWeight(map(mouseY, 0, mouseY, 0, strokeWeightFactor));
 
 
 
-  for (columns = 0; columns < tileCount; columns++) {
-    for (rows = 0; rows < tileCount; rows++) {
-      posX = width / tileCount * rows;
-      posY = height / tileCount * columns;
-      if (enableMouseX) {
+  for (columns = 0; columns < options.tileCount; columns++) {
+    for (rows = 0; rows < options.tileCount; rows++) {
+      posX = width / options.tileCount * rows;
+      posY = height / options.tileCount * columns;
+      if (options.enableMouseX) {
         ellipse(posX + 0, posY + 0, mouseY / 15, mouseX / 15);
       } else {
           ellipse(posX + 0, posY + 0, mouseY / 15, mouseY / 15);
