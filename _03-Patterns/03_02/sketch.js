@@ -23,6 +23,7 @@ function draw() {
   stroke(options.strokeColor[0], options.strokeColor[1],options.strokeColor[2], options.strokeAlpha);
   strokeWeight(1);
 
+  fill(0, 0, 0,);
   textSize(32);
   text(currentTextState, 8, 24);
   textSize(24);
