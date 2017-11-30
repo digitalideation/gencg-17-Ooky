@@ -17,20 +17,21 @@ function setup() {
 
 function draw() {
 
-  background(255, 20);
+  background(255, options.background_alpha);
   smooth();
   noFill();
-  stroke(color(0), 0);
+  stroke(options.strokeColor[0], options.strokeColor[1],options.strokeColor[2], options.strokeAlpha);
   strokeWeight(1);
 
 
   text(currentTextState, 8, 24);
 
-  fill(0, 0, 0, 0);
+  //ToDo: Make a function which converts this [0][1][2] to a color
+  fill(options.fillColor[0], options.fillColor[1],options.fillColor[2], options.fillAlpha);
   for (columns = 0; columns < windowWidth * 2; columns += 100) {
     for (rows = 0; rows < windowHeight * 2; rows += 100) {
       var diameter = dist(mouseX, mouseY, rows, columns);
-      diameter = diameter / max_distance * 40;
+      diameter = diameter / options.max_distance * 40;
       push();
       translate(rows, columns, diameter * 5);
       switchState(diameter);

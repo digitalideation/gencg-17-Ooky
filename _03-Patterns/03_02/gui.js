@@ -21,10 +21,28 @@ var options = {
 
   rectX:0,
   rectY:0,
+
+  fillColor: [0, 0, 0],
+  fillAlpha: 0,
+
+  strokeColor: [0, 0, 0],
+  strokeAlpha: 255,
+
+  max_distance: 50,
+
+  background_alpha: 20,
 };
 
 window.onload = function() {
   var gui = new dat.GUI();
+
+  var myGeneral = gui.addFolder('general');
+  myGeneral.addColor(options, 'fillColor');
+  myGeneral.add(options, 'fillAlpha').min(0).max(255).step(1);
+  myGeneral.addColor(options, 'strokeColor');
+  myGeneral.add(options, 'strokeAlpha').min(0).max(255).step(1);
+  myGeneral.add(options, 'max_distance').min(0).max(500).step(1);
+  myGeneral.add(options, 'background_alpha').min(0).max(255).step(1);
 
   var myArc = gui.addFolder('arc');
   myArc.add(options, 'arcX').min(0).max(360).step(1);
