@@ -2,7 +2,7 @@
 layout: sketch
 title: "PatternTesting"
 category: "Experiment"
-thumb_name: "thumb.jpg"
+thumb_name: "test.gif"
 ---
 
 <!--
