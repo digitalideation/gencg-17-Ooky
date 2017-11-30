@@ -12,7 +12,7 @@ function setup() {
   // Detect screen density (retina)
   var density = displayDensity();
   pixelDensity(density);
-  textSize(32);
+
 }
 
 function draw() {
@@ -23,8 +23,10 @@ function draw() {
   stroke(options.strokeColor[0], options.strokeColor[1],options.strokeColor[2], options.strokeAlpha);
   strokeWeight(1);
 
-
+  textSize(32);
   text(currentTextState, 8, 24);
+  textSize(24);
+  text("press space", 0, windowHeight-8);
 
   //ToDo: Make a function which converts this [0][1][2] to a color
   fill(options.fillColor[0], options.fillColor[1],options.fillColor[2], options.fillAlpha);
@@ -38,15 +40,8 @@ function draw() {
       pop();
     }
   }
-
-
-
-
 }
 
-function mousePressed() {
-
-}
 
 function switchStateLogic() {
   if (stateCounter < 6) {
