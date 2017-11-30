@@ -13,7 +13,7 @@ let strokeWeightValue = 20;
 
 
 function setup() {
-  randomColorValue = toInt(random(350));
+  randomColorValue = toInt(random(360));
   randomSaturationValue = toInt(random(100));
 
   // Canvas setup
