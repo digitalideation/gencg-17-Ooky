@@ -12,7 +12,7 @@ var colorCycleIteration = 3;
 
 
 function setup() {
-  randomColorValue = toInt(random(255));
+  randomColorValue = toInt(random(350));
   randomSaturationValue = toInt(random(100));
 
   // Canvas setup
@@ -63,8 +63,8 @@ function mousePressed() {
 
 function mouseReleased() {
   isMousePressed = false;
-  if (colorValueCounter > colorCycleIteration) {
-    randomColorValue = toInt(random(255));
+  if (colorValueCounter >= colorCycleIteration) {
+    randomColorValue = abs(randomColorValue - toInt(random(350)));
     colorValueCounter = 0;
   } else {
     colorValueCounter++;
