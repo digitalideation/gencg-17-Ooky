@@ -8,10 +8,10 @@ function dynamicallyLoadScript(url) {
 
 
 // Global var
-let squareSize;
+const squareSize = 50;
 let rows;
 let columns
-let startingCellIndex = 40;
+let startingCellIndex;
 let currentCell;
 let cells = [];
 let stack = [];
@@ -24,6 +24,7 @@ let colorVisited;
 dynamicallyLoadScript('cell.js');
 
 function setup() {
+
   // Canvas setup
   canvas = createCanvas(windowWidth, windowHeight-45);
   canvas.parent("p5Container");
