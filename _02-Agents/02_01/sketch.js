@@ -1,6 +1,6 @@
 "use strict";
 // Global var
-const squareSize = 40;
+const squareSize = 30;
 let rows;
 let columns
 let startingCellIndex;
@@ -76,7 +76,7 @@ function setStartingCell() {
 
 function drawStartingCell() {
   let positionX = cells[startingCellIndex].x * squareSize;
-  let positionY = cells[startingCellIndex].x * squareSize;
+  let positionY = cells[startingCellIndex].y * squareSize;
   fill(colorVisited);
   rect(positionX, positionY, squareSize, squareSize);
 }
