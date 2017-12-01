@@ -6,6 +6,7 @@ let columns
 let startingCellIndex;
 let currentCell;
 let cells = [];
+let stack = [];
 
 //Colors
 let colorHighlight;
@@ -15,7 +16,7 @@ let colorVisited;
 
 function setup() {
   // Canvas setup
-  canvas = createCanvas(windowWidth, windowHeight - 45);
+  canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5Container");
   // Detect screen density (retina)
   var density = displayDensity();
@@ -31,6 +32,22 @@ function draw() {
   background(0);
   drawStartingCell();
   drawGrid();
+  currentCell.highlight();
+  currentCell.visited = true;
+
+  //STEP 1
+  let nextCell = currentCell.getRandomNextNeighbourCell();
+  if (nextCell != null) {
+    //STEP 2
+    stack.push(currentCell);
+    //STEP 3
+    removeWallsBetweenCells(currentCell, nextCell);
+    //STEP 4
+    currentCell = nextCell;
+    nextCell.visited = true;
+  } else if (stack.length > 0) {
+    currentCell = stack.pop();
+  }
 }
 
 function initGridAndCells() {
@@ -47,9 +64,9 @@ function initGridAndCells() {
 }
 
 function setupColors() {
-  colorHighlight = color('rgba(0, 255, 0, 255)');
+  colorHighlight = color('rgba(0, 255, 0, 1)');
   colorWalls = color(255);
-  colorVisited = color('rgba(0, 255, 0, 100)');
+  colorVisited = color('rgba(50, 255, 0, 0.5)');
 }
 
 function setStartingCell() {
@@ -65,8 +82,27 @@ function drawStartingCell() {
 }
 
 function drawGrid() {
-  for(let i = 0; i < cells.length; i++) {
+  for (let i = 0; i < cells.length; i++) {
     cells[i].drawGrid();
+  }
+}
+
+function removeWallsBetweenCells(currentCell, nextCell) {
+  let differenceVertical = currentCell.x - nextCell.x;
+  if (differenceVertical == 1) {
+    currentCell.wallMap["LEFT"] = false;
+    nextCell.wallMap["RIGHT"] = false;
+  } else if (differenceVertical == -1) {
+    currentCell.wallMap["RIGHT"] = false;
+    nextCell.wallMap["LEFT"] = false;
+  }
+  let differenceHorizontal = currentCell.y - nextCell.y;
+  if (differenceHorizontal == 1) {
+    currentCell.wallMap["TOP"] = false;
+    nextCell.wallMap["BOTTOM"] = false;
+  } else if (differenceHorizontal == -1) {
+    currentCell.wallMap["BOTTOM"] = false;
+    nextCell.wallMap["TOP"] = false;
   }
 }
 
