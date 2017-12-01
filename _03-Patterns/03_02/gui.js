@@ -42,7 +42,7 @@ window.onload = function() {
   myGeneral.addColor(options, 'strokeColor');
   myGeneral.add(options, 'strokeAlpha').min(0).max(255).step(1);
   myGeneral.add(options, 'max_distance').min(0).max(500).step(1);
-  myGeneral.add(options, 'background_alpha').min(0).max(255).step(1);
+  myGeneral.add(options, 'background_alpha').min(0).max(500).step(1);
 
   var myArc = gui.addFolder('arc');
   myArc.add(options, 'arcX').min(0).max(360).step(1);
