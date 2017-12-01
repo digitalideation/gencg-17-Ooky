@@ -1,14 +1,19 @@
 class Cell {
 
   constructor(x, y) {
-     this.cellX = x;
-     this.cellY = y;
+     this.x = x;
+     this.y = y;
+     this.wallMap =  {
+       TOP: true,
+       RIGHT: true,
+       BOTTOM: true,
+       LEFT: true,
+     }
 
   }
 
-   sayHi() {
-    console.log('hi');
-    console.log(this.testX);
+   drawGrid() {
+    stroke(colorWalls);
   }
 
 }
