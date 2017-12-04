@@ -8,7 +8,7 @@ function dynamicallyLoadScript(url) {
 
 
 // Global var
-const squareSize = 50;
+const squareSize = 20;
 let rows;
 let columns
 let startingCellIndex;
