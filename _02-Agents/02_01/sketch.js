@@ -26,7 +26,7 @@ dynamicallyLoadScript('cell.js');
 function setup() {
 
   // Canvas setup
-  canvas = createCanvas(windowWidth, windowHeight-45);
+  canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5Container");
   // Detect screen density (retina)
   var density = displayDensity();

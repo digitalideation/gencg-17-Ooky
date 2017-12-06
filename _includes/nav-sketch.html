@@ -9,7 +9,7 @@
         <span class="icon-bar"></span>
       </button>
 
-      {% for col in site.collections %} 
+      {% for col in site.collections %}
         {% for doc in col.docs %}
           {% if doc.id == page.id %}
             {% assign current_collection = col.label %}
@@ -17,13 +17,13 @@
         {% endfor %}
       {% endfor %}
 
-      <a class="navbar-brand page-scroll" href="javascript:history.back()">X</a>
+      <a class="navbar-brand page-scroll" href="javascript:history.back()"></a>
       <a class="navbar-brand page-scroll" >{{ current_collection }}</a>
     </div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav navbar-right">
 
-        {% for col in site.collections %} 
+        {% for col in site.collections %}
           {% if col.label == current_collection %}
             {% for doc in col.docs %}
               <li><a class="page-scroll" href="{{ site.baseurl }}{{ doc.url }}">{{ forloop.index0 }}</a></li>
