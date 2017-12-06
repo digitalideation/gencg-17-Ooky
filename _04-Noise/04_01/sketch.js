@@ -11,22 +11,22 @@ function setup() {
 }
 
 function draw() {
-  background(0, 0, 0, 25);
+  background(0);
   noFill();
   stroke(255);
   beginShape();
-  let maxRange = map(mouseY, 0, height, 0, 5);
+  let maxRange = map(mouseY, 0, height, 0, 50);
   for (let x = 0; x < width; x++) {
-    let nx = map(x*millis() / 1000 , 0, width, 0, maxRange);
+    let nx = map(x, 0, width, 0, maxRange) * millis()/1000;
     let y = height * noise(nx);
     if (switchOrientation) {
       vertex(y, x);
     } else {
-      vertex(x-millis()/100, y);
+      vertex(x, y);
     }
   }
   endShape();
-  console.log(maxRange);
+
 }
 
 function mousePressed() {
