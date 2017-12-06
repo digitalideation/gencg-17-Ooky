@@ -20,3 +20,6 @@ collections:
 
   03-Patterns:
     output: true
+
+  04-Noise:
+    output: true
