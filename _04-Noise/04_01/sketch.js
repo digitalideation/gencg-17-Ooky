@@ -1,10 +1,13 @@
+let switchOrientation;
+
 function setup() {
   // Canvas setup
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5Container");
   // Detect screen density (retina)
-  var density = displayDensity();
+  let density = displayDensity();
   pixelDensity(density);
+  switchOrientation = false;
 }
 
 function draw() {
@@ -12,13 +15,22 @@ function draw() {
   noFill();
   stroke(255);
   beginShape();
-  var maxRange = map(mouseY, 0, height, 0, 5);
-  for (var x = 0; x < width; x++) {
-    var nx = millis() / 1000 * map(x, 0, width, 0, maxRange);
-    var y = height * noise(nx);
-    vertex(x, y);
+  let maxRange = map(mouseY, 0, height, 0, 5);
+  for (let x = 0; x < width; x++) {
+    let nx = map(x*millis() / 1000 , 0, width, 0, maxRange);
+    let y = height * noise(nx);
+    if (switchOrientation) {
+      vertex(y, x);
+    } else {
+      vertex(x-millis()/100, y);
+    }
   }
   endShape();
+  console.log(maxRange);
+}
+
+function mousePressed() {
+  switchOrientation = !switchOrientation;
 }
 
 
