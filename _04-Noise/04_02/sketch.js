@@ -30,6 +30,7 @@ function setup() {
   analyzer.setInput(song);
   song.loop();
   volume = 0.5;
+
 }
 
 
@@ -37,7 +38,7 @@ function setup() {
 
 function draw() {
   let rms = analyzer.getLevel();
-  background(backgroundGrey, 50);
+  background(backgroundGrey, 30);
   song.amp(volume); //Volume
   // Create points array
   let faderX = mouseX / width;
@@ -54,10 +55,10 @@ function draw() {
   }
 
   // Draw
-  stroke(255, 50);
+  let mappedColorValue =360- abs(map(rms, 0, 1, 0, 360));
+  stroke(colorHsluv(mappedColorValue, 100, 50));
   beginShape();
   for (let i = 0; i < count; i++) {
-    fill(255);
     ellipse(points[i].x, points[i].y, 2, 2);
     noFill();
     curveVertex(points[i].x, points[i].y);
@@ -66,7 +67,10 @@ function draw() {
   endShape(CLOSE);
 }
 
-
+function colorHsluv(h, s, l) {
+  var rgb = hsluv.hsluvToRgb([h, s, l]);
+  return color(rgb[0] * 255, rgb[1] * 255, rgb[2] * 255);
+}
 
 function mousePressed() {
   if (song.isPlaying()) {
