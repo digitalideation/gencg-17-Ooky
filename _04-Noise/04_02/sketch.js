@@ -8,6 +8,8 @@ var volume;
 
 let isFill;
 
+let colorOverTime = 0;
+
 function preload() {
   song = loadSound('Dyrisk-FlyBoy-Over-You.wav');
 }
@@ -39,8 +41,14 @@ function setup() {
 
 
 function draw() {
+
+  colorOverTime += 0.5;
+  if (colorOverTime > 360) {
+    colorOverTime = 0;
+  }
+
   let rms = analyzer.getLevel();
-  background(backgroundBlack, 30);
+  background(backgroundBlack, 50);
   song.amp(volume); //Volume
   // Create points array
   let faderX = mouseX / width;
@@ -50,26 +58,28 @@ function draw() {
   let angle = radians(360 / count);
 
   for (let i = 0; i < count; i++) {
-    let radiusRand = r - noise(t, i * faderX) * r/2;
+    let radiusRand = r - noise(t, i * faderX) * r / 2;
     let x = width / 2 + cos(angle * i) * radiusRand;
     let y = height / 2 + sin(angle * i) * radiusRand;
     points[i] = createVector(x, y);
   }
 
   // Draw
-  let mappedColorValue =360- abs(map(rms, 0, 1, 0, 360));
+  let mappedColorValue = (360 - colorOverTime) - abs(map(rms, 0, 1, 0, 360));
   stroke(colorHsluv(mappedColorValue, 100, 50));
   beginShape();
   for (let i = 0; i < count; i++) {
-    if(isFill) {
+    if (isFill) {
       fill(colorHsluv(mappedColorValue, 100, 50));
     } else {
       noFill();
     }
-
     ellipse(points[i].x, points[i].y, 2, 2);
+    //filter(BLUR, 6);
     curveVertex(points[i].x, points[i].y);
-    if (i == 0 || i == count - 1) curveVertex(points[i].x, points[i].y);
+    if (i == 0 || i == count - 1) {
+      curveVertex(points[i].x, points[i].y)
+    };
   }
   endShape(CLOSE);
 }
