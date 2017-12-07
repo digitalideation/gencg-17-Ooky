@@ -1,5 +1,5 @@
 // Some of the var might be initialised in gui.js
-var canvas, backgroundGrey, radius;
+var canvas, backgroundBlack, radius;
 var actRandomSeed, count, points;
 
 var song;
@@ -22,10 +22,10 @@ function setup() {
   pixelDensity(density);
   // Init var
   // some of the var are initialised in gui.js
-  backgroundGrey = 0;
+  backgroundBlack = 0;
   count = 150;
   points = [count];
-  background(backgroundGrey);
+  background(backgroundBlack);
   radius = height / 2;
 
   analyzer = new p5.Amplitude();
@@ -40,7 +40,7 @@ function setup() {
 
 function draw() {
   let rms = analyzer.getLevel();
-  background(backgroundGrey, 30);
+  background(backgroundBlack, 30);
   song.amp(volume); //Volume
   // Create points array
   let faderX = mouseX / width;
@@ -50,7 +50,7 @@ function draw() {
   let angle = radians(360 / count);
 
   for (let i = 0; i < count; i++) {
-    let radiusRand = r - noise(t, i * faderX) * 50;
+    let radiusRand = r - noise(t, i * faderX) * r/2;
     let x = width / 2 + cos(angle * i) * radiusRand;
     let y = height / 2 + sin(angle * i) * radiusRand;
     points[i] = createVector(x, y);
