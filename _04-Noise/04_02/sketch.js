@@ -6,6 +6,8 @@ var song;
 var analyzer;
 var volume;
 
+let isFill;
+
 function preload() {
   song = loadSound('Dyrisk-FlyBoy-Over-You.wav');
 }
@@ -30,7 +32,7 @@ function setup() {
   analyzer.setInput(song);
   song.loop();
   volume = 0.5;
-
+  isFill = false;
 }
 
 
@@ -59,8 +61,13 @@ function draw() {
   stroke(colorHsluv(mappedColorValue, 100, 50));
   beginShape();
   for (let i = 0; i < count; i++) {
+    if(isFill) {
+      fill(colorHsluv(mappedColorValue, 100, 50));
+    } else {
+      noFill();
+    }
+
     ellipse(points[i].x, points[i].y, 2, 2);
-    noFill();
     curveVertex(points[i].x, points[i].y);
     if (i == 0 || i == count - 1) curveVertex(points[i].x, points[i].y);
   }
@@ -73,13 +80,7 @@ function colorHsluv(h, s, l) {
 }
 
 function mousePressed() {
-  if (song.isPlaying()) {
-    song.stop();
-    background(255, 0, 0);
-  } else {
-    song.play();
-    background(0, 255, 0);
-  }
+  isFill = !isFill;
 }
 
 
