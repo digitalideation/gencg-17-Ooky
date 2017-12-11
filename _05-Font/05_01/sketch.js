@@ -1,12 +1,5 @@
-function setup() {
-  fill('#ED225D');
-  textFont(myFont);
-  textSize(36);
-  text('p5*js', 10, 50);
-}
-
-
-
+let myFont;
+let myText;
 
 function setup() {
   // Canvas setup
@@ -15,14 +8,16 @@ function setup() {
   // Detect screen density (retina)
   let density = displayDensity();
   pixelDensity(density);
+  myFont = "Barlow Semi Condensed";
+  myText = "myText";
 }
 
 function draw() {
   background(50);
-  textFont("Barlow Semi Condensed");
+  textFont(myFont);
   fill(255);
   textSize(64);
-  text("Google Satisfy font", windowWidth/2-64, windowHeight/2-64, 200, 200);
+  text(myText, windowWidth/2-64, windowHeight/2-64, 200, 200);
 }
 
 
