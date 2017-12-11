@@ -23,3 +23,6 @@ collections:
 
   04-Noise:
     output: true
+
+  05-Font:
+    output: true
