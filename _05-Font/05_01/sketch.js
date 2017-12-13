@@ -1,5 +1,7 @@
 let myFont;
 let myText;
+let myTextWidth;
+
 
 function setup() {
   // Canvas setup
@@ -9,7 +11,8 @@ function setup() {
   let density = displayDensity();
   pixelDensity(density);
   myFont = "Barlow Semi Condensed";
-  myText = "myText";
+  myText = "SampleProject";
+  myTextWidth = textWidth(myText);
 }
 
 function draw() {
@@ -17,7 +20,7 @@ function draw() {
   textFont(myFont);
   fill(255);
   textSize(64);
-  text(myText, windowWidth/2-64, windowHeight/2-64, 200, 200);
+  text(myText, windowWidth/2-myTextWidth*2, windowHeight/2-64, 200, 200);
 }
 
 
