@@ -22,7 +22,7 @@ function setup() {
   textFont(myFont);
   fill(0);
   textSize(128);
-  text(myText, windowWidth / 2 - myTextWidth-800/2, windowHeight / 2 - 64, 800, 400);
+  text(myText, windowWidth / 2 - myTextWidth-200, windowHeight / 2 - 64, 800, 400);
   imageLocation = 0;
 }
 
