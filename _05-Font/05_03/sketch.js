@@ -23,7 +23,7 @@ function setup() {
   textFont(myFont);
   fill(0);
   textSize(128);
-  text(myText, windowWidth / 2 - myTextWidth /2, windowHeight / 2 /2, 800, 400);
+  text(myText, windowWidth / 2 - myTextWidth -200, windowHeight / 2 -400, 800, 400);
 }
 
 
@@ -32,7 +32,7 @@ function setup() {
 function draw() {
   loadPixels();
   changeColor();
-  //changeBorderColor();
+  changeBorderColor();
   updatePixels();
 }
 
@@ -93,18 +93,17 @@ function changeBorderColor() {
   }
 }
 
+function getOutline() {
 
+}
 
 function changeColor() {
-  let rValue = map(mouseX, 0, windowWidth, 0, 255);
-  let gValue = map(mouseY, 0, windowHeight, 0, 255);
   for (let x = 0; x < windowWidth; x++) {
     for (let y = 0; y < windowHeight; y++) {
-      imageLocation = (x + y * windowWidth) * 4;
-      if (pixels[x * 4 + y * windowWidth * 4+2] != 50) {
-        pixels[x * 4 + y * windowWidth * 4] = rValue; //r
-        pixels[x * 4 + y * windowWidth * 4 + 1] = gValue; //g
-        pixels[x * 4 + y * windowWidth * 4 + 2] = 0; //b
+      if (pixels[pixelLocation(x, y, "blue")] != colorValueToTestFor) { //check for blue value
+        pixels[pixelLocation(x, y, "red")] = 255; //r
+        pixels[pixelLocation(x, y, "green")] = 255; //g
+        pixels[pixelLocation(x, y, "blue")] = 255; //b
       }
     }
   }
