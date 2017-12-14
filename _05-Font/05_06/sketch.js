@@ -4,7 +4,7 @@
 // Some of the var might be initialised in gui.js
 let agents, density;
 let colorToCheck;
-let stateCounter = 0;
+let stateCounter = 6;
 
 function setup() {
   // Canvas setup
@@ -117,7 +117,6 @@ function switchStateLogic() {
   } else {
     stateCounter = 0;
   }
-  console.log(stateCounter);
 }
 
 

@@ -125,8 +125,8 @@ class Agent {
           break;
 
         case 6:
-          _point.x += (cos((_angle))) * log(cos(_stepSize));
-          _point.y += (tan((_angle))) * log(sin(_stepSize));
+          _point.x += cos(_angle) * log(cos(_stepSize));
+          _point.y += tan(_angle) * log(sin(_stepSize));
           break;
 
         case 7:
