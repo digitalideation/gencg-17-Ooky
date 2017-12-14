@@ -23,14 +23,6 @@ class Agent {
 
       switchState();
 
-
-
-
-
-
-
-
-
       if (_point.x < -10) _isOutside = true;
       else if (_point.x > width + 10) _isOutside = true;
       else if (_point.y < -10) _isOutside = true;
@@ -137,12 +129,13 @@ class Agent {
           break;
 
         default:
+          options.txtAlpha = 60;
+          options.alphaBackground = 15;
+          options.alphaAgents = 40;
+          options.strokeWidth = 1.2;
           _point.x += tan(_angle) * (_stepSize);
           _point.y += (_angle) * (_stepSize);
-
       }
     }
-
   }
-
 }

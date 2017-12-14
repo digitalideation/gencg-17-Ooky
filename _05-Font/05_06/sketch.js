@@ -4,7 +4,7 @@
 // Some of the var might be initialised in gui.js
 let agents, density;
 let colorToCheck;
-let stateCounter = 6;
+let stateCounter = 0;
 
 function setup() {
   // Canvas setup
@@ -111,7 +111,7 @@ function checkNoiseFallOffRange() {
 
 
 function switchStateLogic() {
-  if (stateCounter <= 7) {
+  if (stateCounter < 7) {
     stateCounter++;
     initScene();
   } else {
