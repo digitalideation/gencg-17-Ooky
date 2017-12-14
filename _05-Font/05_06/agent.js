@@ -92,10 +92,10 @@ class Agent {
           break;
 
         case 2:
-           options.txtAlpha = 128;
-           options.alphaBackground = 11;
-           options.alphaAgents = 180;
-           options.strokeWidth = 0.5;
+          options.txtAlpha = 128;
+          options.alphaBackground = 11;
+          options.alphaAgents = 180;
+          options.strokeWidth = 0.5;
           _point.x += tan(_angle) * tan(_stepSize);
           _point.y += tan(_angle) * (_stepSize);
           break;
@@ -110,11 +110,16 @@ class Agent {
           break;
 
         case 4:
+          options.alphaAgents = 10;
           _point.x += cos(_angle) * sin(_stepSize);
           _point.y += sin(_angle) * cos(_stepSize);
           break;
 
         case 5:
+          options.txtAlpha = 255;
+          options.alphaBackground = 0;
+          options.alphaAgents = 20;
+          options.strokeWidth = 0.1;
           _point.x -= (_angle) * (_stepSize) * millis() / 10000;
           _point.y += (_angle) * (_stepSize) * millis() / 10000;
           break;
@@ -125,6 +130,8 @@ class Agent {
           break;
 
         case 7:
+          options.strokeWidth = random(0.1, 3);
+          options.txtAlpha = 255;
           _point.x += tan(random(0, 50));
           _point.y += tan(random(0, 50));
           break;
