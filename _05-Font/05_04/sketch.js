@@ -1,9 +1,8 @@
 // Based on the code M_1_5_01.pde from
 // Generative Gestaltung, ISBN: 978-3-87439-759-9
 
-// Global var
 // Some of the var might be initialised in gui.js
-var agents, density;
+let agents, density;
 
 function setup() {
   // Canvas setup
@@ -13,87 +12,101 @@ function setup() {
   // Comment it out if the sketch is too slow
   density = displayDensity();
   pixelDensity(density);
-  // Init var
-  // some of the var might be initialised in gui.js
-  backgroundGrey = 0;
-  background(backgroundGrey);
-  // Init 
+  backgroundColor = 0;
   initScene();
 }
 
+function initScene() {
+  background(0);
+  fill(1);
+  textSize(options.txtSize);
+  text(options.txt, width / 2 - textWidth(options.txt) / 2, height / 2 + options.txtSize / 2);
+
+  agents = [];
+  let step = options.step;
+  let myWidth = width * density;
+  let myHeigth = height * density;
+  let container = document.getElementById('p5Container');
+  ctx = container.firstChild.getContext("2d");
+  let data = ctx.getImageData(0, 0, myWidth, myHeigth).data;
+  for (let i = 0; i < myWidth; i += step) {
+    for (let j = 0; j < myHeigth; j += step) {
+      if (data[((i + j * myWidth) * 4) + 1] == 1) { //r=0,g=0,b=0
+        agents.push(new Agent(i / density, j / density));
+      }
+    }
+  }
+}
+
 function draw() {
-
-  // 
   smooth();
-  background(backgroundGrey, options.overlayAlpha);  
-  stroke(255, options.agentsAlpha);
+  background(backgroundColor, options.alphaBackground);
+  stroke(255, options.alphaAgents);
 
-  noiseDetail(options.octaves,options.falloff);
+  noiseDetail(options.noiseOctave, options.noiseFallOff);
 
-  let t = millis()/10000;
+  let deltaTime = millis() / 10000;
 
-  // Draw agents  
-  for(var i=0; i<agents.length-1; i++) {
+  // Draw agents
+  for (let i = 0; i < agents.length; i++) {
     agents[i].draw(options.noiseScale, options.noiseStrength, i, options.strokeWidth, options.drawMode);
   }
 
   // Draw text
   noStroke();
   fill(options.txtGray, options.txtAlpha);
-  textSize(options.txtSize);  
-  text(options.txt, width/2-textWidth(options.txt)/2, height/2+options.txtSize/2);
-
-}
-
-
-function initScene() {
-
-  background(0);
-  fill(1);
   textSize(options.txtSize);
-  text(options.txt, width/2-textWidth(options.txt)/2, height/2+options.txtSize/2);
-  
-  agents = []; 
-  var step = options.step;
-  let w = width*density;
-  let h = height*density;
-  let container = document.getElementById('p5Container');
-  ctx = container.firstChild.getContext("2d");
-  let data = ctx.getImageData(0, 0, w, h).data;
-  for(var i=0; i<w; i+=step){
-    for(var j=0; j<h; j+=step){
-      if(data[ ((i + j*w)*4) + 1] == 1){
-        agents.push(new Agent(i/density, j/density));
-      }
-    }
-  }  
-
+  text(options.txt, width / 2 - textWidth(options.txt) / 2, height / 2 + options.txtSize / 2);
 }
 
 function keyReleased() {
-  if (keyCode == DELETE || keyCode == BACKSPACE) background(backgroundGrey);  
-  if (keyCode == 32) {
-    for(var i=0; i<agents.length-1; i++) agents[i].restart();
-    background(backgroundGrey);
-  }
-  if (key == 's' || key == 'S') saveThumb(650, 350);
-
-  if (key == '1') options.drawMode = 1;
-  if (key == '2') options.drawMode = 2;
-  if (key == ' ') {
+  if (keyCode == DELETE || keyCode == BACKSPACE) {
+    background(backgroundColor);
+  } else if (keyCode == 32) { //SPACE
+    for (let i = 0; i < agents.length - 1; i++) {
+      agents[i].restart()
+    };
+    background(backgroundColor);
+  } else if (key == 's' || key == 'S') {
+    saveThumb(650, 350);
+  } else if (key == '1') {
+    options.drawMode = 1;
+  } else if (key == '2') {
+    options.drawMode = 2;
+  } else if (key == ' ') {
     let newNoiseSeed = floor(random(100000));
     noiseSeed(newNoiseSeed);
-  }  
+  } else if (keyCode == UP_ARROW) {
+    options.noiseFallOff += 0.05;
+    checkNoiseFallOffRange();
+  } else if (keyCode == DOWN_ARROW) {
+    options.noiseFallOff -= 0.05;
+    checkNoiseFallOffRange();
+  } else if (keyCode == LEFT_ARROW) {
+    options.noiseOctave--;
+    checkNoiseOctaveRange();
+  } else if (keyCode == RIGHT_ARROW) {
+    options.noiseOctave++;
+    checkNoiseOctaveRange();
+  }
+}
 
-  if (keyCode == UP_ARROW) options.falloff += 0.05;
-  if (keyCode == DOWN_ARROW) options.falloff -= 0.05;
-  if (options.falloff > 1.0) options.falloff = 1.0;
-  if (options.falloff < 0.0) options.falloff = 0.0;
-  
-  if (keyCode == LEFT_ARROW) options.octaves--;
-  if (keyCode == RIGHT_ARROW) options.octaves++;
-  if (options.octaves < 0) options.octaves = 0;
+function checkNoiseOctaveRange() {
+  if (options.noiseOctave < 0) {
+    options.noiseOctave = 0;
+  }
+  if (options.noiseOctave > 1) {
+    options.noiseOctave = 1;
+  }
+}
 
+function checkNoiseFallOffRange() {
+  if (options.noiseFallOff > 1.0) {
+    options.noiseFallOff = 1.0;
+  }
+  if (options.noiseFallOff < 0.0) {
+    options.noiseFallOff = 0.0;
+  }
 }
 
 // Tools

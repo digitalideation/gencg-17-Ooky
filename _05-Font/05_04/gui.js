@@ -10,15 +10,15 @@ var options = {
     step: 8,
     refresh: function () { initScene() },
     // Draw
-    overlayAlpha: 0,
-    agentsAlpha: 125,
+    alphaBackground: 0,
+    alphaAgents: 125,
     strokeWidth: 0.1,
     // Noise
     noiseScale: 1,
     noiseStrength: 50,
     drawMode: 2,
-    octaves: 20,
-    falloff: 1,
+    noiseOctave: 20,
+    noiseFallOff: 1,
 };
 
 window.onload = function() {
@@ -28,8 +28,8 @@ window.onload = function() {
   var f1 = gui.addFolder('Noise');
   f1.add(options, 'noiseScale').min(1).max(1000).step(1);
   f1.add(options, 'noiseStrength').min(0).max(100).step(1);
-  f1.add(options, 'octaves').min(0).max(20).step(1);
-  f1.add(options, 'falloff').min(0).max(1).step(.05);
+  f1.add(options, 'noiseOctave').min(0).max(20).step(1);
+  f1.add(options, 'noiseFallOff').min(0).max(1).step(.05);
   f1.add(options, 'drawMode', [1, 2] );
   f1.add(options, 'agentsType', [1, 2] );
   // Text
@@ -41,8 +41,8 @@ window.onload = function() {
   // Refresh text
   gui.add(options, 'refresh');
   // Draw
-  gui.add(options, 'overlayAlpha').min(0).max(255).step(.1);
-  gui.add(options, 'agentsAlpha').min(0).max(255).step(.1);
+  gui.add(options, 'alphaBackground').min(0).max(255).step(.1);
+  gui.add(options, 'alphaAgents').min(0).max(255).step(.1);
   gui.add(options, 'strokeWidth').min(0).max(10).step(.1);
 
 };
