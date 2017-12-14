@@ -75,7 +75,6 @@ class Agent {
       switch (stateCounter) {
         case 0:
           options.txtAlpha = 60;
-          options.step = 8;
           options.alphaBackground = 15;
           options.alphaAgents = 40;
           options.strokeWidth = 1.2;
@@ -84,16 +83,28 @@ class Agent {
           break;
 
         case 1:
+          options.txtAlpha = 0;
+          options.alphaBackground = 255;
+          options.alphaAgents = 255;
+          options.strokeWidth = 0.1;
           _point.x += (_angle) * (_stepSize);
           _point.y += (_angle) * (_stepSize);
           break;
 
         case 2:
+           options.txtAlpha = 128;
+           options.alphaBackground = 11;
+           options.alphaAgents = 180;
+           options.strokeWidth = 0.5;
           _point.x += tan(_angle) * tan(_stepSize);
           _point.y += tan(_angle) * (_stepSize);
           break;
 
         case 3:
+          options.txtAlpha = 255;
+          options.alphaBackground = 1;
+          options.alphaAgents = 40;
+          options.strokeWidth = 0.1;
           _point.x += (_angle) * (_stepSize);
           _point.y += tan(_angle) * tan(_stepSize);
           break;

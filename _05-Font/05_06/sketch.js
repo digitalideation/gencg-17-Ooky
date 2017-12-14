@@ -4,7 +4,7 @@
 // Some of the var might be initialised in gui.js
 let agents, density;
 let colorToCheck;
-let stateCounter = 0;
+let stateCounter = 4;
 
 function setup() {
   // Canvas setup
@@ -66,10 +66,7 @@ function keyReleased() {
   if (keyCode == DELETE || keyCode == BACKSPACE) {
     background(backgroundColor);
   } else if (keyCode == 32) { //SPACE
-    for (let i = 0; i < agents.length - 1; i++) {
-      agents[i].restart()
-    };
-    background(backgroundColor);
+    switchStateLogic();
   } else if (key == 's' || key == 'S') {
     saveThumb(650, 350);
   } else if (key == '1') {
@@ -112,9 +109,6 @@ function checkNoiseFallOffRange() {
   }
 }
 
-function mousePressed() {
-  // switchStateLogic();
-}
 
 function switchStateLogic() {
   if (stateCounter <= 7) {

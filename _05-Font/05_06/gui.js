@@ -7,7 +7,7 @@ var options = {
     txtSize: 175,
     txtGray: 1,
     txtAlpha: 40,
-    step: 6,
+    step: 8,
     refresh: function () { initScene() },
     // Draw
     alphaBackground: 1,
