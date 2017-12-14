@@ -7,51 +7,51 @@ class Agent {
 
     let _angle;
     let _isOutside = false;
-    let _p = createVector(x, y);
-    let _pStart = createVector(x, y);
-    let _pOld = createVector(x, y);
-    let _stepSize = random(1, 5);
+    let _point = createVector(x, y);
+    let _pointStart = createVector(x, y);
+    let _pointOld = createVector(x, y);
+    let _stepSize = random(250, 500);
 
     this.draw = function(noiseScale, noiseStrength, p, strokeWidth, drawMode){
 
       if (drawMode == 1) {
-        _angle = noise(_p.x/noiseScale, _p.y/noiseScale, p) * noiseStrength;
+        _angle = noise(_point.x/noiseScale, _point.y/noiseScale, p) * noiseStrength;
       } else {
-        _angle = noise(_p.x/noiseScale, _p.y/noiseScale, p) * 24; //
+        _angle = noise(_point.x/noiseScale, _point.y/noiseScale, p) * 24; //
         _angle = (_angle - toInt(_angle)) * noiseStrength;  //
       }
 
-      _p.x += cos(_angle) * _stepSize;
-      _p.y += sin(_angle) * _stepSize;
+      _point.x += cos(_angle) * _stepSize;
+      _point.y += sin(_angle) * _stepSize;
 
-      if(_p.x<-10) _isOutside = true;
-      else if(_p.x>width+10) _isOutside = true;
-      else if(_p.y<-10) _isOutside = true;
-      else if(_p.y>height+10) _isOutside = true;
+      if(_point.x<-10) _isOutside = true;
+      else if(_point.x>width+10) _isOutside = true;
+      else if(_point.y<-10) _isOutside = true;
+      else if(_point.y>height+10) _isOutside = true;
 
       if (_isOutside) this.restart();
 
       // Draw
       strokeWeight(strokeWidth);
-      line(_pOld.x, _pOld.y, _p.x, _p.y);
-      point(_p.x, _p.y);
+      line(_pointOld.x, _pointOld.y, _point.x, _point.y);
+      point(_point.x, _point.y);
 
-      _pOld.set(_p);
+      _pointOld.set(_point);
 
       _isOutside = false;
     }
 
-    this.getPosition = function() { return _p; }
+    this.getPosition = function() { return _point; }
 
     this.getAngle = function() { return _angle; }
 
-    this.setPosition = function(p) { _p = p; }
+    this.setPosition = function(p) { _point = p; }
 
     this.setAngle = function(angle) { _angle = angle; }
 
     this.restart = function() {
-      _p.set(_pStart);
-      _pOld.set(_p);      
+      _point.set(_pointStart);
+      _pointOld.set(_point);
     }
 
   }

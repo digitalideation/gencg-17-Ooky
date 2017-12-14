@@ -4,14 +4,14 @@ var options = {
     agentsType: 1,
     // Text
     txt: "Digital Ideation",
-    txtSize: 125,
+    txtSize: 250,
     txtGray: 1,
-    txtAlpha: 255,
+    txtAlpha: 40,
     step: 8,
     refresh: function () { initScene() },
     // Draw
-    alphaBackground: 0,
-    alphaAgents: 125,
+    alphaBackground: 6,
+    alphaAgents: 25,
     strokeWidth: 0.1,
     // Noise
     noiseScale: 1,
