@@ -40,19 +40,10 @@ function changeBorderColor() {
 }
 
 function getOutline() {
-  for (let x = 0; x < windowWidth; x++) {
-    for (let y = 0; y < windowHeight; y++) {
-      //pixels[(x * 4 + y * windowWidth * 4 + 0)]= 20;
+  for (let x = 1; x < windowWidth-1; x++) {
+    for (let y = 1; y < windowHeight-1; y++) {
+      pixels[(x * 4 + y * windowWidth * 4 + 0)]= 20;
 
-        if( y== 0) { //TOP
-          pixels[(x * 4 + y * windowWidth * 4 + 0)]= 255;
-        } else if (x==0) {//LEFT
-            pixels[(x * 4 + y * windowWidth * 4 + 0)]= 255;
-        } else if(x == windowWidth-1) {//RIGHT
-            pixels[(x * 4 + y * windowWidth * 4 + 0)]= 255;
-        } else if(y == windowHeight-1) {//BOTTOM
-            pixels[(x * 4 + y * windowWidth * 4 + 0)]= 255;
-        }
 
         /*
         if(x == windowWidth-1) {
