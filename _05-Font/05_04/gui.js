@@ -4,7 +4,7 @@ var options = {
     agentsType: 1,
     // Text
     txt: "Digital Ideation",
-    txtSize: 250,
+    txtSize: 175,
     txtGray: 1,
     txtAlpha: 40,
     step: 8,
