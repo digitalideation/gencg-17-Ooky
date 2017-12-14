@@ -4,6 +4,7 @@
 // Some of the var might be initialised in gui.js
 let agents, density;
 let colorToCheck;
+let stateCounter = 0;
 
 function setup() {
   // Canvas setup
@@ -20,7 +21,7 @@ function setup() {
 function initScene() {
   colortoCheck = 66;
   background(0);
-  fill(colortoCheck, 241, 244);//needed for collision
+  fill(colortoCheck, 241, 244); //needed for collision
   textSize(options.txtSize);
   text(options.txt, width / 2 - textWidth(options.txt) / 2, height / 2 + options.txtSize / 2);
 
@@ -51,7 +52,7 @@ function draw() {
 
   // Draw agents
   for (let i = 0; i < agents.length; i++) {
-    agents[i].draw(options.noiseScale, options.noiseStrength, i, options.strokeWidth, options.drawMode);
+    agents[i].draw(options.noiseScale, options.noiseStrength, i, options.strokeWidth, options.drawMode, stateCounter);
   }
 
   // Draw text
@@ -110,6 +111,21 @@ function checkNoiseFallOffRange() {
     options.noiseFallOff = 0.0;
   }
 }
+
+function mousePressed() {
+  // switchStateLogic();
+}
+
+function switchStateLogic() {
+  if (stateCounter <= 7) {
+    stateCounter++;
+    initScene();
+  } else {
+    stateCounter = 0;
+  }
+  console.log(stateCounter);
+}
+
 
 // Tools
 // resize canvas when the window is resized

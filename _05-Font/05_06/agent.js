@@ -12,23 +12,29 @@ class Agent {
     let _pointOld = createVector(x, y);
     let _stepSize = random(1, 5);
 
-    this.draw = function(noiseScale, noiseStrength, p, strokeWidth, drawMode){
+    this.draw = function(noiseScale, noiseStrength, p, strokeWidth, drawMode, stateCounter) {
 
       if (drawMode == 1) {
-        _angle = noise(_point.x/noiseScale, _point.y/noiseScale, p) * noiseStrength;
+        _angle = noise(_point.x / noiseScale, _point.y / noiseScale, p) * noiseStrength;
       } else {
-        _angle = noise(_point.x/noiseScale, _point.y/noiseScale, p) * 24; //
-        _angle = (_angle - toInt(_angle)) * noiseStrength;  //
+        _angle = noise(_point.x / noiseScale, _point.y / noiseScale, p) * 24; //
+        _angle = (_angle - toInt(_angle)) * noiseStrength; //
       }
 
+      switchState();
 
-      _point.x += tan(_angle) * tan(_stepSize);
-      _point.y += (_angle) * (_stepSize);
 
-      if(_point.x<-10) _isOutside = true;
-      else if(_point.x>width+10) _isOutside = true;
-      else if(_point.y<-10) _isOutside = true;
-      else if(_point.y>height+10) _isOutside = true;
+
+
+
+
+
+
+
+      if (_point.x < -10) _isOutside = true;
+      else if (_point.x > width + 10) _isOutside = true;
+      else if (_point.y < -10) _isOutside = true;
+      else if (_point.y > height + 10) _isOutside = true;
 
       if (_isOutside) this.restart();
 
@@ -43,17 +49,80 @@ class Agent {
     }
 
 
-    this.getPosition = function() { return _point; }
+    this.getPosition = function() {
+      return _point;
+    }
 
-    this.getAngle = function() { return _angle; }
+    this.getAngle = function() {
+      return _angle;
+    }
 
-    this.setPosition = function(p) { _point = p; }
+    this.setPosition = function(p) {
+      _point = p;
+    }
 
-    this.setAngle = function(angle) { _angle = angle; }
+    this.setAngle = function(angle) {
+      _angle = angle;
+    }
 
     this.restart = function() {
       _point.set(_pointStart);
       _pointOld.set(_point);
+    }
+
+
+    function switchState() {
+      switch (stateCounter) {
+        case 0:
+          options.txtAlpha = 60;
+          options.step = 8;
+          options.alphaBackground = 15;
+          options.alphaAgents = 40;
+          options.strokeWidth = 1.2;
+          _point.x += tan(_angle) * (_stepSize);
+          _point.y += (_angle) * (_stepSize);
+          break;
+
+        case 1:
+          _point.x += (_angle) * (_stepSize);
+          _point.y += (_angle) * (_stepSize);
+          break;
+
+        case 2:
+          _point.x += tan(_angle) * tan(_stepSize);
+          _point.y += tan(_angle) * (_stepSize);
+          break;
+
+        case 3:
+          _point.x += (_angle) * (_stepSize);
+          _point.y += tan(_angle) * tan(_stepSize);
+          break;
+
+        case 4:
+          _point.x += cos(_angle) * sin(_stepSize);
+          _point.y += sin(_angle) * cos(_stepSize);
+          break;
+
+        case 5:
+          _point.x -= (_angle) * (_stepSize) * millis() / 10000;
+          _point.y += (_angle) * (_stepSize) * millis() / 10000;
+          break;
+
+        case 6:
+          _point.x += (cos((_angle))) * log(cos(_stepSize));
+          _point.y += (tan((_angle))) * log(sin(_stepSize));
+          break;
+
+        case 7:
+          _point.x += tan(random(0, 50));
+          _point.y += tan(random(0, 50));
+          break;
+
+        default:
+          _point.x += tan(_angle) * (_stepSize);
+          _point.y += (_angle) * (_stepSize);
+
+      }
     }
 
   }
