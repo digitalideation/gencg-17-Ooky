@@ -5,13 +5,15 @@ let myColor;
 let imageLocation;
 let r, b, g;
 let colorValueToTestFor;
+let outlinePixels;
 
 
 function setup() {
-  // Canvas setup
+  imageLocation = 0;
+  noSmooth();
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5Container");
-  colorValueToTestFor = 150;
+  colorValueToTestFor = 50;
   background(colorValueToTestFor);
   myFont = "Barlow Semi Condensed";
   myText = "Digital Ideation";
@@ -22,7 +24,7 @@ function setup() {
   fill(0);
   textSize(128);
   text(myText, windowWidth / 2 - myTextWidth - 200, windowHeight / 2 - 64, 800, 400);
-  imageLocation = 0;
+  outlinePixels = [];
 }
 
 
@@ -42,31 +44,64 @@ function changeBorderColor() {
 function getOutline() {
   for (let x = 1; x < windowWidth-1; x++) {
     for (let y = 1; y < windowHeight-1; y++) {
-      pixels[(x * 4 + y * windowWidth * 4 + 0)]= 20;
 
 
-        /*
-        if(x == windowWidth-1) {
-          pixels[pixelLocation(x, y, "red")]= 255;
-        }
-        */
+      pixels[pixelLocation(x, y, "red")]= 20;
 
-        //reicht es wenn man x und y = 1 setzt in der for-schleife?
-        //und anstelle < windowWidth   < windowWidth-1 nehmen?
+      imageLocation = x+y*windowWidth;
+      //pixels[500+windowWidth*60] = 255;//500+windowWidth*60
+
+      pixels[50000]=255;
 
 
-
-      //if not top border && not right && not bottom && not LeftTop
-        //imageLocation = x+ywindowWith;
         //Check Top
-        //if(Pixel oberhalb von diesem Pixel != diesselbe farbe wie der angeschaute pixel)
+        if(pixels[pixelLocation(x, y, "blue")]
+        != pixels[pixelLocation(x,y-1, "blue")]) {
+          pixels[pixelLocation(x, y-1, "red")] = 255;
+          outlinePixels.push(pixels[pixelLocation(x, y-1, "red")]);
+        }
         //Check TopRight
+        if(pixels[pixelLocation(x, y, "blue")]
+        != pixels[pixelLocation(x+1,y-1, "blue")]) {
+          pixels[pixelLocation(x+1, y-1, "red")] = 255;
+          outlinePixels.push(pixels[pixelLocation(x+1, y-1, "red")]);
+        }
         //Check Right
+        if(pixels[pixelLocation(x, y, "blue")]
+        != pixels[pixelLocation(x+1,y, "blue")]) {
+          pixels[pixelLocation(x+1, y, "red")] = 255;
+          outlinePixels.push(pixels[pixelLocation(x+1, y, "red")]);
+        }
         //Check RightBottm
+        if(pixels[pixelLocation(x, y, "blue")]
+        != pixels[pixelLocation(x+1,y+1, "blue")]) {
+          pixels[pixelLocation(x+1, y+1, "red")] = 255;
+          outlinePixels.push(pixels[pixelLocation(x+1, y+1, "red")]);
+        }
         //Check Bottom
+        if(pixels[pixelLocation(x, y, "blue")]
+        != pixels[pixelLocation(x,y+1, "blue")]) {
+          pixels[pixelLocation(x, y+1, "red")] = 255;
+          outlinePixels.push(pixels[pixelLocation(x, y+1, "red")]);
+        }
         //Check BottomLeft
+        if(pixels[pixelLocation(x, y, "blue")]
+        != pixels[pixelLocation(x-1,y+1, "blue")]) {
+          pixels[pixelLocation(x-1, y+1, "red")] = 255;
+          outlinePixels.push(pixels[pixelLocation(x-1, y+1, "red")]);
+        }
         //Check Left
+        if(pixels[pixelLocation(x, y, "blue")]
+        != pixels[pixelLocation(x-1,y, "blue")]) {
+          pixels[pixelLocation(x-1, y, "red")] = 255;
+          outlinePixels.push(pixels[pixelLocation(x-1, y, "red")]);
+        }
         //Check LeftTop
+        if(pixels[pixelLocation(x, y, "blue")]
+        != pixels[pixelLocation(x-1,y-1, "blue")]) {
+          pixels[pixelLocation(x-1, y-1, "red")] = 255;
+          outlinePixels.push(pixels[pixelLocation(x-1, y-1, "red")]);
+        }
     }
   }
 }
