@@ -3,22 +3,22 @@ var options = {
     // Mode
     agentsType: 1,
     // Text
-    txt: "Hello World",
-    txtSize: 250,
-    txtGray: 50,
-    txtAlpha: 0,
-    step: 6,
+    txt: "Digital Ideation",
+    txtSize: 125,
+    txtGray: 1,
+    txtAlpha: 255,
+    step: 8,
     refresh: function () { initScene() },
     // Draw
-    overlayAlpha: 5,
-    agentsAlpha: 30,
-    strokeWidth: 0.3,
+    overlayAlpha: 0,
+    agentsAlpha: 125,
+    strokeWidth: 0.1,
     // Noise
-    noiseScale: 10,
-    noiseStrength: 500,
-    drawMode: 1,
-    octaves: 4,
-    falloff: 0.5
+    noiseScale: 1,
+    noiseStrength: 50,
+    drawMode: 2,
+    octaves: 20,
+    falloff: 1,
 };
 
 window.onload = function() {
@@ -26,7 +26,6 @@ window.onload = function() {
 
   // Noise
   var f1 = gui.addFolder('Noise');
-  f1.add(options, 'noiseStrength');
   f1.add(options, 'noiseScale').min(1).max(1000).step(1);
   f1.add(options, 'noiseStrength').min(0).max(100).step(1);
   f1.add(options, 'octaves').min(0).max(20).step(1);
