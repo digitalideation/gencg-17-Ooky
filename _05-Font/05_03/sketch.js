@@ -4,14 +4,15 @@ let myTextWidth;
 let myColor;
 let imageLocation;
 let r, b, g;
+let colorValueToTestFor;
 
 
 function setup() {
   // Canvas setup
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5Container");
-  // Detect screen density (retina)
-  background(50);
+  colorValueToTestFor = 150;
+  background(colorValueToTestFor);
   myFont = "Barlow Semi Condensed";
   myText = "Digital Ideation";
   myTextWidth = textWidth(myText);
@@ -41,9 +42,16 @@ function changeBorderColor() {
 function getOutline() {
   for (let x = 0; x < windowWidth; x++) {
     for (let y = 0; y < windowHeight; y++) {
+      //pixels[(x * 4 + y * windowWidth * 4 + 0)]= 20;
 
-        if( y== 0) {
+        if( y== 0) { //TOP
           pixels[(x * 4 + y * windowWidth * 4 + 0)]= 255;
+        } else if (x==0) {//LEFT
+            pixels[(x * 4 + y * windowWidth * 4 + 0)]= 255;
+        } else if(x == windowWidth-1) {//RIGHT
+            pixels[(x * 4 + y * windowWidth * 4 + 0)]= 255;
+        } else if(y == windowHeight-1) {//BOTTOM
+            pixels[(x * 4 + y * windowWidth * 4 + 0)]= 255;
         }
 
         /*
@@ -74,7 +82,7 @@ function getOutline() {
   function changeColor() {
     for (let x = 0; x < windowWidth; x++) {
       for (let y = 0; y < windowHeight; y++) {
-        if (pixels[pixelLocation(x,y,"blue")] != 50) {//check for blue value
+        if (pixels[pixelLocation(x,y,"blue")] != colorValueToTestFor) {//check for blue value
           pixels[pixelLocation(x,y,"red")] = 255; //r
           pixels[pixelLocation(x,y,"green")] = 255; //g
           pixels[pixelLocation(x,y,"blue")] = 255; //b
