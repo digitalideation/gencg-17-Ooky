@@ -44,16 +44,7 @@ function changeBorderColor() {
 function getOutline() {
   for (let x = 1; x < windowWidth-1; x++) {
     for (let y = 1; y < windowHeight-1; y++) {
-
-
-      pixels[pixelLocation(x, y, "red")]= 20;
-
       imageLocation = x+y*windowWidth;
-      //pixels[500+windowWidth*60] = 255;//500+windowWidth*60
-
-      pixels[50000]=255;
-
-
         //Check Top
         if(pixels[pixelLocation(x, y, "blue")]
         != pixels[pixelLocation(x,y-1, "blue")]) {
