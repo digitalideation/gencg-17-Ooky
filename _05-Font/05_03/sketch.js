@@ -11,8 +11,6 @@ function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5Container");
   // Detect screen density (retina)
-  let density = displayDensity();
-  pixelDensity(density);
   background(50);
   myFont = "Barlow Semi Condensed";
   myText = "Digital Ideation";
@@ -43,8 +41,26 @@ function changeBorderColor() {
 function getOutline() {
   for (let x = 0; x < windowWidth; x++) {
     for (let y = 0; y < windowHeight; y++) {
+
+        if( y== 0) {
+          pixels[(x * 4 + y * windowWidth * 4 + 0)]= 255;
+        }
+
+        /*
+        if(x == windowWidth-1) {
+          pixels[pixelLocation(x, y, "red")]= 255;
+        }
+        */
+
+        //reicht es wenn man x und y = 1 setzt in der for-schleife?
+        //und anstelle < windowWidth   < windowWidth-1 nehmen?
+
+
+
+      //if not top border && not right && not bottom && not LeftTop
+        //imageLocation = x+ywindowWith;
         //Check Top
-        //if()
+        //if(Pixel oberhalb von diesem Pixel != diesselbe farbe wie der angeschaute pixel)
         //Check TopRight
         //Check Right
         //Check RightBottm
