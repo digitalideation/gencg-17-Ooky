@@ -24,7 +24,6 @@ function setup() {
   fill(0);
   textSize(128);
   text(myText, windowWidth / 2 - myTextWidth - 200, windowHeight / 2 - 64, 800, 400);
-  outlinePixels = [];
 }
 
 
@@ -45,6 +44,7 @@ function getOutline() {
   for (let x = 1; x < windowWidth-1; x++) {
     for (let y = 1; y < windowHeight-1; y++) {
       imageLocation = x+y*windowWidth;
+      outlinePixels = [];
         //Check Top
         if(pixels[pixelLocation(x, y, "blue")]
         != pixels[pixelLocation(x,y-1, "blue")]) {
