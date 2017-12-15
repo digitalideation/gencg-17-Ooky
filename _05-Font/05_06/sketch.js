@@ -40,7 +40,7 @@ function initScene() {
   for (let x = 0; x < widthTimesDensity; x += iterationStep) {
     for (let y = 0; y < heightTimesDensity; y += iterationStep) {
       let pixelLocation = (x + y * widthTimesDensity) * 4;
-      //red = 0, green = 0, blue = 0, alpha = 0;
+      //red = 0, green = 1, blue = 2, alpha = 0;
       if (data[pixelLocation + 0] == colorValueToCheckForCollision) {
         agents.push(new Agent(x / density, y / density));
       }

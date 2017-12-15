@@ -1,7 +1,7 @@
 ---
 layout: sketch
-title: "05_06"
-category: "Experiment"
+title: '"Space" = next Layer, "P" = Pause'
+category: "Particles"
 thumb_name: "thumb.jpg"
 includes:
   - src: "gui.js"
