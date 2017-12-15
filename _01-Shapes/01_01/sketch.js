@@ -2,9 +2,20 @@
 // Generative Gestaltung, ISBN: 978-3-87439-759-9
 
 // Global var
-var b = 255, p = false;
- 
+var b = 255,
+  isMousePressed = false;
+
+var randomColorValue;
+var randomSaturationValue;
+var colorValueCounter = 0;
+var colorCycleIteration = 3;
+let strokeWeightValue = 20;
+
+
 function setup() {
+  randomColorValue = toInt(random(360));
+  randomSaturationValue = toInt(random(100));
+
   // Canvas setup
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5Container");
@@ -21,8 +32,9 @@ function draw() {
   smooth();
   noFill();
 
-  if (p) {
-    b = random(255);
+  if (isMousePressed) {
+    //var randomColor = color(random(255), random(255), random(255));
+    var randomColor2 = color('hsl(' + randomColorValue + ', ' + randomSaturationValue + '%, 50%)');
     push();
 
     translate(width / 2, height / 2);
@@ -31,8 +43,8 @@ function draw() {
     var radius = mouseX - width / 2 + 0.5;
     var angle = TWO_PI / circleResolution;
 
-    strokeWeight(2);
-    stroke(b, 25);
+    strokeWeight(strokeWeightValue);
+    stroke(randomColor2, 25);
 
     beginShape();
     for (i = 0; i <= circleResolution; i++) {
@@ -47,16 +59,25 @@ function draw() {
 }
 
 function mousePressed() {
-  p = true;
+  isMousePressed = true;
 }
 
 function mouseReleased() {
-  p = false;
+  isMousePressed = false;
+  if (colorValueCounter >= colorCycleIteration) {
+    randomColorValue = abs(randomColorValue - toInt(random(350)));
+    colorValueCounter = 0;
+    strokeWeightValue = 20;
+  } else {
+    colorValueCounter++;
+    strokeWeightValue -=5;
+  }
+  randomSaturationValue = toInt(random(100));
 }
 
 function keyPressed() {
   // Clear sketch
-  if (keyCode === 32) background(255) // 32 = SPACE BAR 
+  if (keyCode === 32) background(255) // 32 = SPACE BAR
   if (key == 's' || key == 'S') saveThumb(650, 350);
 }
 
@@ -79,6 +100,6 @@ function timestamp() {
 
 // Thumb
 function saveThumb(w, h) {
-  let img = get( width/2-w/2, height/2-h/2, w, h);
-  save(img,'thumb.jpg');
+  let img = get(width / 2 - w / 2, height / 2 - h / 2, w, h);
+  save(img, 'thumb.jpg');
 }
