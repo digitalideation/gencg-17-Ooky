@@ -129,7 +129,6 @@ class Agent {
           _point.x += tan(_angle) * (_stepSize);
           _point.y += (_angle) * (_stepSize);
       }
-
     }
     this.toInt = function(value) {
       return ~~value;
