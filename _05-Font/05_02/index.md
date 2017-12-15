@@ -1,7 +1,7 @@
 ---
 layout: sketch
-title: "05_02"
-category: "Experiment"
+title: "Move Mouse"
+category: "Font"
 thumb_name: "thumb.jpg"
 includes:
   - src: "sketch.js"

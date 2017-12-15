@@ -1,7 +1,7 @@
 ---
 layout: sketch
-title: "02_01"
-category: "Experiment"
+title: "A recursive-depth-first-search algorithms"
+category: "Agent"
 thumb_name: "thumb.jpg"
 includes:
   - src: "cell.js"

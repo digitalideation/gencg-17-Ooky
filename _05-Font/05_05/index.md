@@ -1,7 +1,7 @@
 ---
 layout: sketch
-title: "05_05"
-category: "Experiment"
+title: "SecondTry"
+category: "Font"
 thumb_name: "thumb.jpg"
 includes:
   - src: "gui.js"

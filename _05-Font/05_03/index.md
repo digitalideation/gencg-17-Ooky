@@ -1,7 +1,7 @@
 ---
 layout: sketch
-title: "05_03"
-category: "Experiment"
+title: "BorderRecognition, does not work now."
+category: "Font"
 thumb_name: "thumb.jpg"
 includes:
   - src: "sketch.js"

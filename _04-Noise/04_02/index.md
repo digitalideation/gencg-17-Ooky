@@ -1,7 +1,7 @@
 ---
 layout: sketch
-title: "04_02"
-category: "Experiment"
+title: "Noise with Music"
+category: "Noise"
 thumb_name: "thumb.jpg"
 includes:
   - src: "sketch.js"

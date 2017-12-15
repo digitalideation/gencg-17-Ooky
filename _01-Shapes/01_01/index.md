@@ -1,6 +1,6 @@
 ---
 layout: sketch
-title: "01_01"
+title: "Press and Hold Mouse"
 category: "Shape"
 thumb_name: "thumb.jpg"
 includes:

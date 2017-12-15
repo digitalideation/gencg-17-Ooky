@@ -1,7 +1,7 @@
 ---
 layout: sketch
-title: "05_04"
-category: "Experiment"
+title: "First try with Noise"
+category: "Font"
 thumb_name: "thumb.jpg"
 includes:
   - src: "gui.js"

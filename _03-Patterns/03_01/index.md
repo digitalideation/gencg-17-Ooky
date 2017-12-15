@@ -1,7 +1,7 @@
 ---
 layout: sketch
-title: "03_01"
-category: "Experiment"
+title: "Move Mouse"
+category: "Pattern"
 thumb_name: "thumb.gif"
 includes:
   - src: "gui.js"

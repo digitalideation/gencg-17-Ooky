@@ -1,7 +1,7 @@
 ---
 layout: sketch
-title: "03_02"
-category: "Experiment"
+title: '"Space" = next Layer, Move mouse'
+category: "Pattern"
 thumb_name: "thumb.gif"
 includes:
   - src: "gui.js"

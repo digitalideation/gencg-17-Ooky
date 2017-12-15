@@ -1,7 +1,7 @@
 ---
 layout: sketch
-title: "05_01"
-category: "Experiment"
+title: "FontTest"
+category: "Font"
 thumb_name: "thumb.jpg"
 includes:
   - src: "sketch.js"
