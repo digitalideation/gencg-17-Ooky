@@ -7,6 +7,8 @@ let r, b, g;
 let colorValueToTestFor;
 let outlinePixels;
 
+let onlyRunOnce = true;
+
 
 function setup() {
   imageLocation = 0;
@@ -14,6 +16,11 @@ function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5Container");
   colorValueToTestFor = 50;
+
+  let density = displayDensity();
+  pixelDensity(1);
+
+
   background(colorValueToTestFor);
   myFont = "Barlow Semi Condensed";
   myText = "Digital Ideation";
@@ -23,7 +30,7 @@ function setup() {
   textFont(myFont);
   fill(0);
   textSize(128);
-  text(myText, windowWidth / 2 - myTextWidth -200, windowHeight / 2 -400, 800, 400);
+  text(myText, windowWidth / 2 - myTextWidth - 200, windowHeight / 2 -100, 800, 400);
 }
 
 
@@ -31,8 +38,11 @@ function setup() {
 
 function draw() {
   loadPixels();
-  changeColor();
-  changeBorderColor();
+  if (onlyRunOnce) {
+    changeColor();
+    changeBorderColor();
+    onlyRunOnce = false;
+  }
   updatePixels();
 }
 
@@ -93,14 +103,12 @@ function changeBorderColor() {
   }
 }
 
-function getOutline() {
 
-}
 
 function changeColor() {
   for (let x = 0; x < windowWidth; x++) {
     for (let y = 0; y < windowHeight; y++) {
-      if (pixels[pixelLocation(x, y, "blue")] != colorValueToTestFor) { //check for blue value
+      if (pixels[pixelLocation(x, y, "red")] != colorValueToTestFor) {
         pixels[pixelLocation(x, y, "red")] = 255; //r
         pixels[pixelLocation(x, y, "green")] = 255; //g
         pixels[pixelLocation(x, y, "blue")] = 255; //b
