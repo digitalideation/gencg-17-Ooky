@@ -1,17 +1,11 @@
-// Based on the code M_1_5_01.pde from
-// Generative Gestaltung, ISBN: 978-3-87439-759-9
-
-// Some of the var might be initialised in gui.js
-let agents, density;
-let colorToCheck;
+let density;
+let colorValueToCheckForCollision;
 let stateCounter = 0;
+let agents = [];
 
 function setup() {
-  // Canvas setup
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5Container");
-  // Detect screen density (retina)
-  // Comment it out if the sketch is too slow
   density = displayDensity();
   pixelDensity(density);
   backgroundColor = 0;
@@ -19,22 +13,31 @@ function setup() {
 }
 
 function initScene() {
-  colortoCheck = 66;
+  colorValueToCheckForCollision = 66;
   background(0);
-  fill(colortoCheck, 241, 244); //needed for collision
+  fill(colorValueToCheckForCollision, 241, 244);
   textSize(options.txtSize);
-  text(options.txt, width / 2 - textWidth(options.txt) / 2, height / 2 + options.txtSize / 2);
+  text( //Center the text
+    options.txt,
+    width / 2 - textWidth(options.txt) / 2,
+    height / 2 + options.txtSize / 2
+  );
 
+  //needed to reset the agents
   agents = [];
   let step = options.step;
-  let myWidth = width * density;
-  let myHeigth = height * density;
+  let widthTimesDensity = width * density;
+  let heightTimesDensity = height * density;
+  //Get ImageData from 2D-Context
   let container = document.getElementById('p5Container');
   ctx = container.firstChild.getContext("2d");
-  let data = ctx.getImageData(0, 0, myWidth, myHeigth).data;
-  for (let i = 0; i < myWidth; i += step) {
-    for (let j = 0; j < myHeigth; j += step) {
-      if (data[((i + j * myWidth) * 4) + 0] == colortoCheck) { //r=0,g=0,b=0
+  let data = ctx.getImageData(0, 0, widthTimesDensity, heightTimesDensity).data;
+
+  for (let i = 0; i < widthTimesDensity; i += step) {
+    for (let j = 0; j < heightTimesDensity; j += step) {
+      let pixelLocation = (i + j * widthTimesDensity) * 4;
+      //red = 0, green = 0, blue = 0, alpha = 0;
+      if (data[pixelLocation + 0] == colorValueToCheckForCollision) {
         agents.push(new Agent(i / density, j / density));
       }
     }

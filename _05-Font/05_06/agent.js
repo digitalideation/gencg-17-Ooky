@@ -1,10 +1,6 @@
-// Based on the code M_1_5_01.pde from
-// Generative Gestaltung, ISBN: 978-3-87439-759-9
-
 class Agent {
 
   constructor(x, y) {
-    let _counter = 0;
     let _angle;
     let _isOutside = false;
     let _point = createVector(x, y);
@@ -13,28 +9,32 @@ class Agent {
     let _stepSize = random(1, 5);
 
     this.draw = function(noiseScale, noiseStrength, p, strokeWidth, stateCounter) {
-
       //Calculate Angle based on noise, noiseScale and noiseStrength
       _angle = noise(_point.x / noiseScale, _point.y / noiseScale, p) * 24;
       _angle = (_angle - toInt(_angle)) * noiseStrength;
-
-
       switchState();
 
-      if (_point.x < -10) _isOutside = true;
-      else if (_point.x > width + 10) _isOutside = true;
-      else if (_point.y < -10) _isOutside = true;
-      else if (_point.y > height + 10) _isOutside = true;
+      //Check if pixel is outside
+      if (_point.x < -10) {
+        _isOutside = true;
+      } else if (_point.x > width + 10) {
+        _isOutside = true;
+      } else if (_point.y < -10) {
+        _isOutside = true;
+      } else if (_point.y > height + 10) {
+        _isOutside = true;
+      }
 
-      if (_isOutside) this.restart();
+      if (_isOutside) {
+        this.restart();
+      }
 
-      // Draw
+      //Draw lines and points
       strokeWeight(strokeWidth);
       line(_pointOld.x, _pointOld.y, _point.x, _point.y);
       point(_point.x, _point.y);
-
+      //reset Point
       _pointOld.set(_point);
-
       _isOutside = false;
     }
 
