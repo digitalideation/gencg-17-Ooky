@@ -48,11 +48,7 @@ function draw() {
   smooth();
   background(backgroundColor, options.alphaBackground);
   stroke(255, options.alphaAgents);
-
   noiseDetail(options.noiseOctave, options.noiseFallOff);
-
-  let deltaTime = millis() / 10000;
-
   // Draw agents
   for (let i = 0; i < agents.length; i++) {
     agents[i].draw(options.noiseScale, options.noiseStrength, i, options.strokeWidth, options.drawMode, stateCounter);
@@ -66,52 +62,12 @@ function draw() {
 }
 
 function keyReleased() {
-  if (keyCode == DELETE || keyCode == BACKSPACE) {
-    background(backgroundColor);
-  } else if (keyCode == 32) { //SPACE
+  if (keyCode == 32) { //SPACE
     switchStateLogic();
   } else if (key == 's' || key == 'S') {
     saveThumb(650, 350);
-  } else if (key == '1') {
-    options.drawMode = 1;
-  } else if (key == '2') {
-    options.drawMode = 2;
-  } else if (key == ' ') {
-    let newNoiseSeed = floor(random(100000));
-    noiseSeed(newNoiseSeed);
-  } else if (keyCode == UP_ARROW) {
-    options.noiseFallOff += 0.05;
-    checkNoiseFallOffRange();
-  } else if (keyCode == DOWN_ARROW) {
-    options.noiseFallOff -= 0.05;
-    checkNoiseFallOffRange();
-  } else if (keyCode == LEFT_ARROW) {
-    options.noiseOctave--;
-    checkNoiseOctaveRange();
-  } else if (keyCode == RIGHT_ARROW) {
-    options.noiseOctave++;
-    checkNoiseOctaveRange();
   }
 }
-
-function checkNoiseOctaveRange() {
-  if (options.noiseOctave < 0) {
-    options.noiseOctave = 0;
-  }
-  if (options.noiseOctave > 1) {
-    options.noiseOctave = 1;
-  }
-}
-
-function checkNoiseFallOffRange() {
-  if (options.noiseFallOff > 1.0) {
-    options.noiseFallOff = 1.0;
-  }
-  if (options.noiseFallOff < 0.0) {
-    options.noiseFallOff = 0.0;
-  }
-}
-
 
 function switchStateLogic() {
   if (stateCounter < 7) {
@@ -122,21 +78,9 @@ function switchStateLogic() {
   }
 }
 
-
-// Tools
 // resize canvas when the window is resized
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight, false);
-}
-
-//  conversion
-function toInt(value) {
-  return ~~value;
-}
-
-// Timestamp
-function timestamp() {
-  return Date.now();
 }
 
 // Thumb

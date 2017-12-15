@@ -11,7 +11,7 @@ class Agent {
     this.draw = function(noiseScale, noiseStrength, p, strokeWidth, stateCounter) {
       //Calculate Angle based on noise, noiseScale and noiseStrength
       _angle = noise(_point.x / noiseScale, _point.y / noiseScale, p) * 24;
-      _angle = (_angle - toInt(_angle)) * noiseStrength;
+      _angle = (_angle - this.toInt(_angle)) * noiseStrength;
       switchState();
 
       //Check if pixel is outside
@@ -129,6 +129,10 @@ class Agent {
           _point.x += tan(_angle) * (_stepSize);
           _point.y += (_angle) * (_stepSize);
       }
+
+    }
+    this.toInt = function(value) {
+      return ~~value;
     }
   }
 }
