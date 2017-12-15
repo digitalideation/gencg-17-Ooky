@@ -1,7 +1,3 @@
-// Based on the code M_1_5_01.pde from
-// Generative Gestaltung, ISBN: 978-3-87439-759-9
-
-// Some of the var might be initialised in gui.js
 let agents, density;
 let colorToCheck;
 let stateCounter = 0;
@@ -19,9 +15,9 @@ function setup() {
 }
 
 function initScene() {
-  colortoCheck = 66;
+  colorToCheck = 66;
   background(0);
-  fill(colortoCheck, 241, 244); //needed for collision
+  fill(colorToCheck, 241, 244); //needed for collision
   textSize(options.txtSize);
   text(options.txt, width / 2 - textWidth(options.txt) / 2, height / 2 + options.txtSize / 2);
 
@@ -34,7 +30,7 @@ function initScene() {
   let data = ctx.getImageData(0, 0, myWidth, myHeigth).data;
   for (let i = 0; i < myWidth; i += step) {
     for (let j = 0; j < myHeigth; j += step) {
-      if (data[((i + j * myWidth) * 4) + 0] == colortoCheck) { //r=0,g=0,b=0
+      if (data[((i + j * myWidth) * 4) + 0] == colorToCheck) { //r=0,g=0,b=0
         agents.push(new Agent(i / density, j / density));
       }
     }
@@ -52,7 +48,7 @@ function draw() {
 
   // Draw agents
   for (let i = 0; i < agents.length; i++) {
-    agents[i].draw(options.noiseScale, options.noiseStrength, i, options.strokeWidth, options.drawMode, stateCounter);
+    agents[i].draw(options.noiseScale, options.noiseStrength, i, options.strokeWidth, stateCounter);
   }
 
   // Draw text

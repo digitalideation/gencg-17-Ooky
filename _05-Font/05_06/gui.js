@@ -16,7 +16,6 @@ var options = {
     // Noise
     noiseScale: 1,
     noiseStrength: 50,
-    drawMode: 2,
     noiseOctave: 20,
     noiseFallOff: 1,
 };
@@ -30,7 +29,6 @@ window.onload = function() {
   f1.add(options, 'noiseStrength').min(0).max(100).step(1);
   f1.add(options, 'noiseOctave').min(0).max(20).step(1);
   f1.add(options, 'noiseFallOff').min(0).max(1).step(.05);
-  f1.add(options, 'drawMode', [1, 2] );
   f1.add(options, 'agentsType', [1, 2] );
   // Text
   gui.add(options, 'txt');
