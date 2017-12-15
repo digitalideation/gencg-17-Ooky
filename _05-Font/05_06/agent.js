@@ -12,6 +12,7 @@ class Agent {
       //Calculate Angle based on noise, noiseScale and noiseStrength
       _angle = noise(_point.x / noiseScale, _point.y / noiseScale, p) * 24;
       _angle = (_angle - this.toInt(_angle)) * noiseStrength;
+      stroke(options.noiseColor); 
       switchState();
 
       //Check if pixel is outside

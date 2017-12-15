@@ -15,6 +15,7 @@ var options = {
     noiseStrength: 50,
     noiseOctave: 20,
     noiseFallOff: 1,
+    noiseColor: [255, 255, 255],
 };
 
 window.onload = function() {
@@ -34,6 +35,7 @@ window.onload = function() {
   gui.add(options, 'alphaBackground').min(0).max(255).step(.1);
   gui.add(options, 'alphaAgents').min(0).max(255).step(.1);
   gui.add(options, 'strokeWidth').min(0).max(10).step(.1);
+  gui.addColor(options, 'noiseColor');
   // Refresh scene
   gui.add(options, 'refresh');
 };
