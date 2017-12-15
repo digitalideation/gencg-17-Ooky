@@ -1,84 +1,134 @@
-// Based on the code P_2_1_1_01.pde from
-// Generative Gestaltung, ISBN: 978-3-87439-759-9
+"use strict";
+
+function dynamicallyLoadScript(url) {
+    var script = document.createElement("script"); // Make a script DOM node
+    script.src = url; // Set it's src to the provided URL
+    document.head.appendChild(script); // Add it to the end of the head section of the page (could change 'head' to 'body' to add it to the end of the body section instead)
+}
+
 
 // Global var
-var tileCount, actRandomSeed, actStrokeCap;
- 
+const squareSize = 40;
+let rows;
+let columns
+let startingCellIndex;
+let currentCell;
+let cells = [];
+let stack = [];
+
+//Colors
+let colorHighlight;
+let colorWalls;
+let colorVisited;
+
+dynamicallyLoadScript('cell.js');
+
 function setup() {
+
   // Canvas setup
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5Container");
   // Detect screen density (retina)
   var density = displayDensity();
   pixelDensity(density);
-  // Colors and drawing modes
-  smooth();
-  // Init Var
-  tileCount = 20;
-  actRandomSeed = 0;
-  actStrokeCap = ROUND; 
+  //Grid
+  setupColors();
+  initGridAndCells();
+  setStartingCell();
+  //frameRate(5);
 }
 
 function draw() {
-  // Canvas draw options
-  background(255);
-  smooth();
-  noFill();
+  background(0);
+  drawStartingCell();
+  drawGrid();
+  currentCell.highlight();
+  currentCell.visited = true;
 
-  // Stroke options
-  strokeCap(actStrokeCap);
-  randomSeed(actRandomSeed);
+  //STEP 1
+  let nextCell = currentCell.getRandomNextNeighbourCell();
+  if (nextCell != null) {
+    //STEP 2
+    stack.push(currentCell);
+    //STEP 3
+    removeWallsBetweenCells(currentCell, nextCell);
+    //STEP 4
+    currentCell = nextCell;
+    nextCell.visited = true;
+  } else if (stack.length > 0) {
+    currentCell = stack.pop();
+  }
+}
 
-  for (let gridX = 0; gridX < tileCount; gridX++) {
-    for (let gridY = 0; gridY < tileCount; gridY++) {
-
-      let posX = width / tileCount * gridX;
-      let posY = width / tileCount * gridY;
-
-      let toggle = toInt(random(0, 2));
-
-      if (toggle == 0) {
-        strokeWeight(mouseX / 20);
-        line(posX, posY, posX + width / tileCount, posY + height / tileCount);
-
-      } else if (toggle == 1) {
-        strokeWeight(mouseY / 20);
-        line(posX, posY + width / tileCount, posX + height / tileCount, posY);
-      }
+function initGridAndCells() {
+  //initGridAndCells
+  rows = floor(windowHeight / squareSize);
+  columns = floor(windowWidth / squareSize);
+  //Cells
+  for (let y = 0; y < rows; y++) {
+    for (let x = 0; x < columns; x++) {
+      let cell = new Cell(x, y);
+      cells.push(cell);
     }
   }
 }
 
-function mousePressed() {
-  actRandomSeed = toInt(random(100000));
+function setupColors() {
+  colorHighlight = color('rgba(0, 255, 0, 1)');
+  colorWalls = color(255);
+  colorVisited = color('rgba(50, 255, 0, 0.5)');
 }
+
+function setStartingCell() {
+  startingCellIndex = floor(random(0, columns * rows - 1));
+  currentCell = cells[startingCellIndex];
+}
+
+function drawStartingCell() {
+  let positionX = cells[startingCellIndex].x * squareSize;
+  let positionY = cells[startingCellIndex].y * squareSize;
+  fill(colorVisited);
+  rect(positionX, positionY, squareSize, squareSize);
+}
+
+function drawGrid() {
+  for (let i = 0; i < cells.length; i++) {
+    cells[i].drawGrid();
+  }
+}
+
+function removeWallsBetweenCells(currentCell, nextCell) {
+  let differenceVertical = currentCell.x - nextCell.x;
+  if (differenceVertical == 1) {
+    currentCell.wallMap["LEFT"] = false;
+    nextCell.wallMap["RIGHT"] = false;
+  } else if (differenceVertical == -1) {
+    currentCell.wallMap["RIGHT"] = false;
+    nextCell.wallMap["LEFT"] = false;
+  }
+  let differenceHorizontal = currentCell.y - nextCell.y;
+  if (differenceHorizontal == 1) {
+    currentCell.wallMap["TOP"] = false;
+    nextCell.wallMap["BOTTOM"] = false;
+  } else if (differenceHorizontal == -1) {
+    currentCell.wallMap["BOTTOM"] = false;
+    nextCell.wallMap["TOP"] = false;
+  }
+}
+
+
 
 function keyPressed() {
   if (key == 's' || key == 'S') saveThumb(650, 350);
-  if (key == '1') actStrokeCap = ROUND;
-  if (key == '2') actStrokeCap = SQUARE;
-  if (key == '3') actStrokeCap = PROJECT;
 }
-
-// Tools
 
 // resize canvas when the window is resized
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight, false);
 }
 
-// Int conversion
-function toInt(value) {
-  return ~~value;
-}
-
-// Timestamp
-function timestamp() {
-  return Date.now();
-}
-
 // Thumb
 function saveThumb(w, h) {
-  let img = get( width/2-w/2, height/2-h/2, w, h);
-  save(img,'thumb.jpg');
+  let img = get(width / 2 - w / 2, height / 2 - h / 2, w, h);
+  save(img, 'thumb.jpg');
 }
