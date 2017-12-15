@@ -7,7 +7,7 @@ var options = {
     txtSize: 175,
     txtGray: 1,
     txtAlpha: 40,
-    step: 8,
+    iterationStep: 8,
     refresh: function () { initScene() },
     // Draw
     alphaBackground: 1,
@@ -35,7 +35,7 @@ window.onload = function() {
   gui.add(options, 'txtSize').step(1);
   gui.add(options, 'txtGray').min(1).max(255).step(1);
   gui.add(options, 'txtAlpha').min(0).max(255).step(.1);
-  gui.add(options, 'step').min(1).max(100).step(1);
+  gui.add(options, 'iterationStep').min(1).max(100).step(1);
   // Refresh text
   gui.add(options, 'refresh');
   // Draw

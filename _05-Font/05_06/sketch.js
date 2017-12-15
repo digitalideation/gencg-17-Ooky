@@ -2,6 +2,7 @@ let density;
 let colorValueToCheckForCollision;
 let stateCounter = 0;
 let agents = [];
+let myFont;
 
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
@@ -9,10 +10,12 @@ function setup() {
   density = displayDensity();
   pixelDensity(density);
   backgroundColor = 0;
+  myFont = "Barlow Semi Condensed";
   initScene();
 }
 
 function initScene() {
+  textFont(myFont);
   colorValueToCheckForCollision = 66;
   background(0);
   fill(colorValueToCheckForCollision, 241, 244);
@@ -25,20 +28,20 @@ function initScene() {
 
   //needed to reset the agents
   agents = [];
-  let step = options.step;
+  let iterationStep = options.iterationStep;
   let widthTimesDensity = width * density;
   let heightTimesDensity = height * density;
   //Get ImageData from 2D-Context
   let container = document.getElementById('p5Container');
   ctx = container.firstChild.getContext("2d");
   let data = ctx.getImageData(0, 0, widthTimesDensity, heightTimesDensity).data;
-
-  for (let i = 0; i < widthTimesDensity; i += step) {
-    for (let j = 0; j < heightTimesDensity; j += step) {
-      let pixelLocation = (i + j * widthTimesDensity) * 4;
+  //Iterate through the image with iterationStep
+  for (let x = 0; x < widthTimesDensity; x += iterationStep) {
+    for (let y = 0; y < heightTimesDensity; y += iterationStep) {
+      let pixelLocation = (x + y * widthTimesDensity) * 4;
       //red = 0, green = 0, blue = 0, alpha = 0;
       if (data[pixelLocation + 0] == colorValueToCheckForCollision) {
-        agents.push(new Agent(i / density, j / density));
+        agents.push(new Agent(x / density, y / density));
       }
     }
   }
@@ -53,12 +56,15 @@ function draw() {
   for (let i = 0; i < agents.length; i++) {
     agents[i].draw(options.noiseScale, options.noiseStrength, i, options.strokeWidth, options.drawMode, stateCounter);
   }
-
   // Draw text
   noStroke();
   fill(1, options.txtAlpha);
   textSize(options.txtSize);
-  text(options.txt, width / 2 - textWidth(options.txt) / 2, height / 2 + options.txtSize / 2);
+  text(//Center Text
+    options.txt,
+    width / 2 - textWidth(options.txt) / 2,
+    height / 2 + options.txtSize / 2
+  );
 }
 
 function keyReleased() {
