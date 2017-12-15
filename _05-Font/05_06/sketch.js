@@ -3,6 +3,7 @@ let colorValueToCheckForCollision;
 let stateCounter = 0;
 let agents = [];
 let myFont;
+let pause = false;
 
 function setup() {
   canvas = createCanvas(windowWidth, windowHeight);
@@ -48,23 +49,25 @@ function initScene() {
 }
 
 function draw() {
-  smooth();
-  background(backgroundColor, options.alphaBackground);
-  stroke(255, options.alphaAgents);
-  noiseDetail(options.noiseOctave, options.noiseFallOff);
-  // Draw agents
-  for (let i = 0; i < agents.length; i++) {
-    agents[i].draw(options.noiseScale, options.noiseStrength, i, options.strokeWidth, options.drawMode, stateCounter);
+  if (!pause) {
+    smooth();
+    background(backgroundColor, options.alphaBackground);
+    stroke(255, options.alphaAgents);
+    noiseDetail(options.noiseOctave, options.noiseFallOff);
+    // Draw agents
+    for (let i = 0; i < agents.length; i++) {
+      agents[i].draw(options.noiseScale, options.noiseStrength, i, options.strokeWidth, options.drawMode, stateCounter);
+    }
+    // Draw text
+    noStroke();
+    fill(1, options.txtAlpha);
+    textSize(options.txtSize);
+    text( //Center Text
+      options.txt,
+      width / 2 - textWidth(options.txt) / 2,
+      height / 2 + options.txtSize / 2
+    );
   }
-  // Draw text
-  noStroke();
-  fill(1, options.txtAlpha);
-  textSize(options.txtSize);
-  text(//Center Text
-    options.txt,
-    width / 2 - textWidth(options.txt) / 2,
-    height / 2 + options.txtSize / 2
-  );
 }
 
 function keyReleased() {
@@ -72,6 +75,8 @@ function keyReleased() {
     switchStateLogic();
   } else if (key == 's' || key == 'S') {
     saveThumb(650, 350);
+  } else if (key == 'p' || key == 'P') {
+    pause = !pause;
   }
 }
 
