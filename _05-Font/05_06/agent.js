@@ -12,7 +12,7 @@ class Agent {
       //Calculate Angle based on noise, noiseScale and noiseStrength
       _angle = noise(_point.x / noiseScale, _point.y / noiseScale, p) * 24;
       _angle = (_angle - this.toInt(_angle)) * noiseStrength;
-      stroke(options.noiseColor); 
+      stroke(options.noiseColor);
       switchState();
 
       //Check if pixel is outside
@@ -52,7 +52,7 @@ class Agent {
           options.alphaBackground = 15;
           options.alphaAgents = 40;
           options.strokeWidth = 1.2;
-          _point.x += tan(_angle) * (_stepSize);
+          _point.x += tan(_angle) * (_stepSize) +0.01;
           _point.y += (_angle) * (_stepSize);
           break;
 
@@ -70,8 +70,8 @@ class Agent {
           options.alphaBackground = 11;
           options.alphaAgents = 180;
           options.strokeWidth = 0.5;
-          _point.x += tan(_angle) * tan(_stepSize);
-          _point.y += tan(_angle) * (_stepSize);
+          _point.x += tan(_angle) * tan(_stepSize) +0.01;
+          _point.y += tan(_angle) * (_stepSize) +0.01;
           break;
 
         case 3:
@@ -80,7 +80,7 @@ class Agent {
           options.alphaAgents = 40;
           options.strokeWidth = 0.1;
           _point.x += (_angle) * (_stepSize);
-          _point.y += tan(_angle) * tan(_stepSize);
+          _point.y += tan(_angle) * tan(_stepSize) +0.01;
           break;
 
         case 4:
@@ -91,8 +91,8 @@ class Agent {
           options.noiseFallOff = 0.1;
           //Agents
           options.alphaAgents = 10;
-          _point.x += cos(_angle) * sin(_stepSize);
-          _point.y += sin(_angle) * cos(_stepSize);
+          _point.x += cos(_angle) * sin(_stepSize) +0.01;
+          _point.y += sin(_angle) * cos(_stepSize) +0.01;
           break;
 
         case 5:
@@ -112,14 +112,14 @@ class Agent {
 
         case 6:
           _point.x += cos(_angle) * log(cos(_stepSize));
-          _point.y += tan(_angle) * (sin(_stepSize));
+          _point.y += tan(_angle) * (sin(_stepSize)) +0.01;
           break;
 
         case 7:
           options.strokeWidth = random(0.1, 3);
           options.txtAlpha = 255;
-          _point.x += tan(random(0, 50));
-          _point.y += tan(random(0, 50));
+          _point.x += tan(random(0, 50)) +0.01;
+          _point.y += tan(random(0, 50)) +0.01;
           break;
 
         default:
@@ -127,7 +127,7 @@ class Agent {
           options.alphaBackground = 15;
           options.alphaAgents = 40;
           options.strokeWidth = 1.2;
-          _point.x += tan(_angle) * (_stepSize);
+          _point.x += tan(_angle) * (_stepSize) +0.01;
           _point.y += (_angle) * (_stepSize);
       }
     }
