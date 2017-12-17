@@ -1,59 +1,49 @@
-// Based on the code P_2_0_02.pde from
-// Generative Gestaltung, ISBN: 978-3-87439-759-9
-
-// Global var
-var b = 255,
-  isMousePressed = false;
-
-var randomColorValue;
-var randomSaturationValue;
-var colorValueCounter = 0;
-var colorCycleIteration = 3;
+let isMousePressed = false;
+let randomColorValue;
+let randomSaturationValue;
+let colorValueCounter = 0;
+let colorCycleIteration = 3;
 let strokeWeightValue = 20;
 
 
 function setup() {
   randomColorValue = toInt(random(360));
   randomSaturationValue = toInt(random(100));
-
   // Canvas setup
   canvas = createCanvas(windowWidth, windowHeight);
   canvas.parent("p5Container");
   // Detect screen density (retina)
-  var density = displayDensity();
+  let density = displayDensity();
   pixelDensity(density);
   // Colors and drawing modes
   background(255);
   smooth();
-  // Init Var
 }
 
 function draw() {
   smooth();
   noFill();
-
   if (isMousePressed) {
-    //var randomColor = color(random(255), random(255), random(255));
-    var randomColor2 = color('hsl(' + randomColorValue + ', ' + randomSaturationValue + '%, 50%)');
+    //let randomColor = color(random(255), random(255), random(255));
+    let randomColor2 = color('hsl(' + randomColorValue + ', ' + randomSaturationValue + '%, 50%)');
     push();
 
     translate(width / 2, height / 2);
 
-    var circleResolution = toInt(map(mouseY + 100, 0, height, 2, 10));
-    var radius = mouseX - width / 2 + 0.5;
-    var angle = TWO_PI / circleResolution;
+    let circleResolution = toInt(map(mouseY + 100, 0, height, 2, 10));
+    let radius = mouseX - width / 2 + 0.5;
+    let angle = TWO_PI / circleResolution;
 
     strokeWeight(strokeWeightValue);
     stroke(randomColor2, 25);
 
     beginShape();
     for (i = 0; i <= circleResolution; i++) {
-      var x = 0 + cos(angle * i) * radius;
-      var y = 0 + sin(angle * i) * radius;
+      let x = 0 + cos(angle * i) * radius;
+      let y = 0 + sin(angle * i) * radius;
       vertex(x, y);
     }
     endShape();
-
     pop();
   }
 }
@@ -70,7 +60,7 @@ function mouseReleased() {
     strokeWeightValue = 20;
   } else {
     colorValueCounter++;
-    strokeWeightValue -=5;
+    strokeWeightValue -= 5;
   }
   randomSaturationValue = toInt(random(100));
 }
@@ -81,8 +71,6 @@ function keyPressed() {
   if (key == 's' || key == 'S') saveThumb(650, 350);
 }
 
-// Tools
-
 // resize canvas when the window is resized
 function windowResized() {
   resizeCanvas(windowWidth, windowHeight, false);
@@ -91,11 +79,6 @@ function windowResized() {
 // Int conversion
 function toInt(value) {
   return ~~value;
-}
-
-// Timestamp
-function timestamp() {
-  return Date.now();
 }
 
 // Thumb
