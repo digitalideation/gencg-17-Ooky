@@ -24,18 +24,15 @@ function draw() {
   smooth();
   noFill();
   if (isMousePressed) {
-    //let randomColor = color(random(255), random(255), random(255));
-    let randomColor2 = color('hsl(' + randomColorValue + ', ' + randomSaturationValue + '%, 50%)');
+    let randomColor = color('hsl(' + randomColorValue + ', ' + randomSaturationValue + '%, 50%)');
     push();
-
     translate(width / 2, height / 2);
-
     let circleResolution = toInt(map(mouseY + 100, 0, height, 2, 10));
     let radius = mouseX - width / 2 + 0.5;
     let angle = TWO_PI / circleResolution;
 
     strokeWeight(strokeWeightValue);
-    stroke(randomColor2, 25);
+    stroke(randomColor, 25);
 
     beginShape();
     for (i = 0; i <= circleResolution; i++) {
